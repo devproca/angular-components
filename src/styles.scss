@@ -1,5 +1,37 @@
 @import 'tailwindcss/base';
-
 @import 'tailwindcss/components';
-
 @import 'tailwindcss/utilities';
+
+.shadow-error {
+  box-shadow: 0px 0px 0px 3px rgba(245, 101, 101, 0.6);
+}
+
+.shadow-focus {
+  box-shadow: 0px 0px 0px 3px rgba(66, 153, 225, 0.6);
+}
+
+.tw-input {
+  @apply appearance-none outline-none leading-none px-3 py-2 text-sm bg-white border border-solid border-gray-400 rounded w-full text-gray-900;
+  box-sizing: border-box;
+}
+
+.tw-input-focus {
+  @apply shadow-focus;
+}
+
+.tw-input-error {
+  @apply shadow-error;
+}
+
+.tw-input-disabled {
+  @apply bg-gray-200 text-gray-600 outline-none;
+  pointer-events: none;
+}
+
+.tw-input:disabled {
+  @apply tw-input-disabled;
+}
+
+.tw-input:focus {
+  @apply shadow-focus;
+}

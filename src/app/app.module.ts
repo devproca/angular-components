@@ -4,12 +4,16 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {PopperComponent} from './popper/popper.component';
+import { SelectComponent } from './select/select.component';
+import { SelectItemComponent } from './select-item/select-item.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PopperComponent
+    PopperComponent,
+    SelectComponent,
+    SelectItemComponent
   ],
   imports: [
     BrowserModule,
