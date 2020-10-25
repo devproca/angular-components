@@ -37,7 +37,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() error = false;
   @Output() change = new EventEmitter<any>();
   @ViewChild(PopperComponent) private popper: PopperComponent;
-  @ViewChild('select') private select: ElementRef;
   @ViewChild('filter') private filter: ElementRef;
 
   filtering = false;
@@ -97,7 +96,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   handleClick(event, option: SelectItemModel): void {
     this.handleSelect(option.value);
-    this.select.nativeElement.focus();
+    this.filter.nativeElement.focus();
   }
 
   handleMouseEnter(option: SelectItemModel): void {
