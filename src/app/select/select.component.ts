@@ -36,7 +36,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input() value: any;
   @Input() error = false;
   @Output() change = new EventEmitter<any>();
-  private activeItem: SelectItemModel;
   @ViewChild(PopperComponent) private popper: PopperComponent;
   @ViewChild('select') private select: ElementRef;
   @ViewChild('filter') private filter: ElementRef;
@@ -45,6 +44,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   filterTextControl = new FormControl();
   filteredOptions: SelectItemModel[] = [];
 
+  private activeItem: SelectItemModel;
   private _options: SelectItemModel[] = [];
   private onChange: (_: any) => void;
   private onTouch: () => void;
@@ -124,17 +124,13 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.disabled = disabled;
   }
 
-  handleFocusin(): void {
-    this.popper.show();
-  }
-
-  handleFocusout(): void {
-    this.doneFiltering();
-  }
-
   handleOpen(): void {
     this.activeItem = this.filteredOptions.find(o => o.value === this.value);
     this.filter.nativeElement.focus();
+  }
+
+  handleClose(): void {
+    this.doneFiltering();
   }
 
   @HostListener('window:keyup', ['$event'])
@@ -218,6 +214,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     if (this.value !== value) {
       this.value = value;
       this.notifyChanges(this.value);
+      this.filter.nativeElement.focus();
     }
   }
 

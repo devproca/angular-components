@@ -1,4 +1,6 @@
-<tw-popper [hideOnClick]="true" [matchWidth]="true" placement="bottom-start" (opened)="handleOpen()">
+<tw-popper [hideOnClick]="true" [matchWidth]="true" placement="bottom-start"
+           (opened)="handleOpen()"
+           (closed)="handleClose()">
   <div #select class="select"
        [class.tw-input]="true"
        [class.tw-input-disabled]="disabled"
@@ -7,9 +9,7 @@
     <div class="selected-item-wrapper">
       <span *ngIf="!filtering">{{selectedValueLabel}}</span>
       <input #filter class="filter" [class.opacity-0]="!filtering"
-             [formControl]="filterTextControl"
-             (focusin)="handleFocusin()"
-             (focusout)="handleFocusout()">
+             [formControl]="filterTextControl">
     </div>
     <div class="pl-2">
       <tw-svg-angle-down></tw-svg-angle-down>
