@@ -1,1 +1,27 @@
-<p>select works!</p>
+<tw-popper [hideOnClick]="true" [matchWidth]="true" placement="bottom-start" (opened)="handleOpen()">
+  <div #select class="select"
+       [class.tw-input]="true"
+       [class.tw-input-disabled]="disabled"
+       [class.tw-input-error]="error"
+       [class.tw-input-focus]="focused">
+    <div class="selected-item-wrapper">
+      <span *ngIf="!filtering">{{selectedValueLabel}}</span>
+      <input #filter class="filter" [class.opacity-0]="!filtering"
+             [formControl]="filterTextControl"
+             (focusin)="handleFocusin()"
+             (focusout)="handleFocusout()">
+    </div>
+    <div class="pl-2">
+      <tw-svg-angle-down></tw-svg-angle-down>
+    </div>
+  </div>
+  <div (mouseleave)="handleMouseLeave()" class="item-wrapper">
+    <div (click)="handleClick($event, option)"
+         (mouseenter)="handleMouseEnter(option)"
+         *ngFor="let option of filteredOptions"
+         [class.active]="option === activeItem"
+         class="item">
+      {{option.label}}
+    </div>
+  </div>
+</tw-popper>

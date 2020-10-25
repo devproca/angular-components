@@ -1,0 +1,36 @@
+.btn {
+  @apply h-8 px-4 text-sm rounded cursor-pointer;
+  transition: background-color 150ms ease-in;
+}
+
+.btn:focus,
+.btn:active {
+  @apply outline-none;
+}
+
+.btn.btn-blue {
+  @apply bg-blue-500 text-white;
+  box-shadow: inset 0px 0px 6px 0px #3182ce;
+}
+
+.btn.btn-blue:hover {
+  @apply bg-blue-600;
+}
+
+.btn.btn-blue:active {
+  @apply bg-blue-700;
+}
+
+.btn.btn-red {
+  @apply bg-red-500 text-white;
+  box-shadow: inset 0px 0px 6px 0px #e53e3e;
+}
+
+.btn.btn-red:hover {
+  @apply bg-red-600;
+}
+
+.btn.btn-red:active {
+  @apply bg-red-700;
+}
+

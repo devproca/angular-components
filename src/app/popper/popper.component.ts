@@ -4,7 +4,7 @@ import {fromEvent, Subscription} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-popper',
+  selector: 'tw-popper',
   templateUrl: './popper.component.html',
   styleUrls: ['./popper.component.scss']
 })
@@ -12,6 +12,8 @@ export class PopperComponent implements OnInit, OnDestroy, AfterContentInit {
 
   @Input() placement: Placement = 'top';
   @Input() hideOnClick = false;
+  @Input() matchWidth = false;
+
   @Output() closed = new EventEmitter<void>();
   @Output() opened = new EventEmitter<void>();
   private reference: HTMLElement;
@@ -61,6 +63,7 @@ export class PopperComponent implements OnInit, OnDestroy, AfterContentInit {
     this.opened.emit();
     this.open = true;
     this.setContentStyleDisplay('block');
+    this.updateContentWidth();
   }
 
   private subscribeToWindowClick(): void {
@@ -110,19 +113,23 @@ export class PopperComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   private onWindowResize(): void {
-    // this.updateContentWidth();
+    this.updateContentWidth();
+  }
+
+  private updateContentWidth(): void {
+    if (this.matchWidth && this.content) {
+      const width = this.reference.getBoundingClientRect().width;
+      this.css(this.content, {minWidth: `${width}px`});
+      this.popperInstance?.scheduleUpdate();
+    }
   }
 
   private setContentZIndex(): void {
-    Object.assign(this.content.style, {
-      'z-index': 9999
-    });
+    this.css(this.content, {'z-index': 9999});
   }
 
-  private setContentStyleDisplay(style: string): void {
-    Object.assign(this.content.style, {
-      display: style
-    });
+  private setContentStyleDisplay(value: string): void {
+    this.css(this.content, {display: value});
   }
 
   private initializePopper(): void {
@@ -137,5 +144,9 @@ export class PopperComponent implements OnInit, OnDestroy, AfterContentInit {
         }
       }
     });
+  }
+
+  private css(el: HTMLElement, styles: any): void {
+    Object.assign(el.style, styles);
   }
 }

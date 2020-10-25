@@ -1,0 +1,33 @@
+@import '../../input.scss';
+
+:host {
+  @apply block;
+}
+
+.select {
+  @apply flex items-center justify-between;
+}
+
+.select:focus {
+  @apply tw-input-focus;
+}
+
+.selected-item-wrapper {
+  @apply flex items-center flex-grow truncate;
+}
+
+.filter {
+  @apply outline-none text-gray-600 h-full w-full;
+}
+
+.item-wrapper {
+  @apply shadow-md bg-white rounded;
+}
+
+.item {
+  @apply px-3 h-8 truncate flex items-center text-sm leading-none;
+}
+
+.item.active {
+  @apply bg-gray-100 cursor-pointer;
+}
