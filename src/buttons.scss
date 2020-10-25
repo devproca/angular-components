@@ -1,5 +1,5 @@
 .btn {
-  @apply h-8 px-4 text-sm rounded cursor-pointer;
+  @apply h-8 px-4 text-sm rounded cursor-pointer leading-none;
   transition: background-color 150ms ease-in;
 }
 
