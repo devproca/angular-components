@@ -135,15 +135,16 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   @HostListener('window:keyup', ['$event'])
   handleKeyup(event: KeyboardEvent): void {
-    if (this.focused && event.key === 'Backspace') {
-      if (!this.filtering) {
-        this.handleSelect(null);
-      }
+    if (!this.focused) {
       return;
     }
 
-    if (this.focused && this.isAnyLetterOrSpacePressed(event)) {
+    if (event.key === 'Backspace' && !this.filtering) {
+      this.handleSelect(null);
+      return;
+    } else if (this.isAnyLetterOrSpacePressed(event)) {
       this.filtering = true;
+      return;
     }
 
     if (!this.popper.opened) {
