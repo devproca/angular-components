@@ -16,9 +16,9 @@ export class PopperComponent implements OnInit, OnDestroy, AfterContentInit {
 
   @Output() closed = new EventEmitter<void>();
   @Output() opened = new EventEmitter<void>();
+  open = false;
   private reference: HTMLElement;
   private content: HTMLElement;
-  private open = false;
   private subscriptions: Subscription[] = [];
   private popperInstance: Popper;
 
@@ -64,6 +64,10 @@ export class PopperComponent implements OnInit, OnDestroy, AfterContentInit {
     this.open = true;
     this.setContentStyleDisplay('block');
     this.updateContentWidth();
+  }
+
+  update(): void {
+    this.popperInstance?.scheduleUpdate();
   }
 
   private subscribeToWindowClick(): void {

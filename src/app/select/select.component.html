@@ -7,8 +7,11 @@
        [class.tw-input-error]="error"
        [class.tw-input-focus]="focused">
     <div class="selected-item-wrapper">
+      <span class="placeholder" *ngIf="!filtering && !selectedValueLabel && placeholder">{{placeholder}}</span>
       <span *ngIf="!filtering">{{selectedValueLabel}}</span>
       <input #filter class="filter" [class.opacity-0]="!filtering"
+             (focusin)="handleFocus()"
+             (focusout)="handleUnfocus()"
              [formControl]="filterTextControl">
     </div>
     <div class="pl-2">

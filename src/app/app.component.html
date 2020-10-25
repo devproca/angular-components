@@ -3,7 +3,7 @@
 
   <div class="border rounded p-6">
     <label class="block text-sm text-gray-700 mb-2">Numbers</label>
-    <tw-select [formControl]="formControl" [options]="options"></tw-select>
+    <tw-select placeholder="Sample placeholder" [formControl]="formControl" [options]="options"></tw-select>
 
     <div class="my-4">
       <button class="mr-2 btn btn-blue" *ngIf="this.formControl.disabled" (click)="enable()">Enable</button>
@@ -15,5 +15,4 @@
       Value: {{formControl.value}}
     </div>
   </div>
-
 </div>

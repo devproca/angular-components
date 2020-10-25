@@ -3,6 +3,10 @@
   transition: background-color 150ms ease-in;
 }
 
+.btn:disabled {
+  @apply opacity-50 pointer-events-none;
+}
+
 .btn:focus,
 .btn:active {
   @apply outline-none;
@@ -13,7 +17,8 @@
   box-shadow: inset 0px 0px 6px 0px #3182ce;
 }
 
-.btn.btn-blue:hover {
+.btn.btn-blue:hover,
+.btn.btn-blue:focus {
   @apply bg-blue-600;
 }
 
@@ -26,7 +31,8 @@
   box-shadow: inset 0px 0px 6px 0px #e53e3e;
 }
 
-.btn.btn-red:hover {
+.btn.btn-red:hover,
+.btn.btn-red:focus {
   @apply bg-red-600;
 }
 

@@ -33,12 +33,14 @@ const BLANK_OPTION = {value: null, label: ''} as SelectItemModel;
 export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy, DoCheck {
 
   @Input() disabled = false;
+  @Input() placeholder: string;
   @Input() value: any;
   @Input() error = false;
   @Output() change = new EventEmitter<any>();
   @ViewChild(PopperComponent) private popper: PopperComponent;
   @ViewChild('filter') private filter: ElementRef;
 
+  focused = false;
   filtering = false;
   filterTextControl = new FormControl();
   filteredOptions: SelectItemModel[] = [];
@@ -81,10 +83,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.refreshFilteredOptions();
   }
 
-  get focused(): boolean {
-    return document.activeElement === this.filter?.nativeElement;
-  }
-
   get selectedValueLabel(): string {
     const selected = this.selectedValue;
     return selected === undefined ? '' : selected.label;
@@ -92,6 +90,14 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   get selectedValue(): any {
     return this.options.find(o => o.value === this.value);
+  }
+
+  handleFocus(): void {
+    this.focused = true;
+  }
+
+  handleUnfocus(): void {
+    this.focused = false;
   }
 
   handleClick(event, option: SelectItemModel): void {
@@ -125,34 +131,39 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   handleOpen(): void {
     this.activeItem = this.filteredOptions.find(o => o.value === this.value);
-    this.filter.nativeElement.focus();
   }
 
   handleClose(): void {
     this.doneFiltering();
   }
 
-  @HostListener('window:keyup', ['$event'])
-  handleKeyup(event: KeyboardEvent): void {
+  @HostListener('window:keydown', ['$event'])
+  handleKeydown(event: KeyboardEvent): void {
     if (!this.focused) {
       return;
     }
 
-    if (event.key === 'Backspace' && !this.filtering) {
+    if ((event.key === 'Enter' || event.key === 'ArrowDown') && !this.popper.open) {
+      this.popper.show();
+      return;
+    } else if (event.key === 'Tab') {
+      this.popper.hide();
+      this.doneFiltering();
+      return;
+    } else if (event.key === 'Backspace' && !this.filtering) {
       this.handleSelect(null);
       return;
     } else if (this.isAnyLetterOrSpacePressed(event)) {
       this.filtering = true;
+      this.popper.show();
       return;
     }
 
-    if (!this.popper.opened) {
+    if (!this.popper.open) {
       return;
     }
 
-    if (event.key === 'Tab') {
-      this.popper.hide();
-    } else if (event.key === 'Enter' && this.activeItem) {
+    if (event.key === 'Enter' && this.activeItem) {
       this.handleSelect(this.activeItem.value);
       this.popper.hide();
     } else if (event.key === 'ArrowDown') {
@@ -202,6 +213,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
       const lowerFilterText = this.filterTextControl.value.toLowerCase();
       return o.label.toLowerCase().includes(lowerFilterText);
     });
+    this.popper?.update();
   }
 
   private doneFiltering(): void {

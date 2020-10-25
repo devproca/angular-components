@@ -5,11 +5,15 @@
 }
 
 .select {
-  @apply flex items-center justify-between;
+  @apply flex items-center justify-between cursor-default;
 }
 
 .select:focus {
   @apply tw-input-focus;
+}
+
+.placeholder {
+  @apply text-gray-500;
 }
 
 .selected-item-wrapper {
@@ -17,7 +21,7 @@
 }
 
 .filter {
-  @apply outline-none text-gray-600 h-full w-full;
+  @apply outline-none text-gray-600 h-full w-full cursor-default;
 }
 
 .item-wrapper {

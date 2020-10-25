@@ -12,7 +12,7 @@ export class AppComponent {
   options = [
     {
       value: 'ONE',
-      label: 'One Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.'
+      label: 'One asdkjfh alskjdf lkjasdhf lkjasdhf lkjasdhf lkjasdhf lkjasd flkjasd lkfjhadlflasdf a'
     },
     {
       value: 'TWO',
