@@ -154,6 +154,11 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.doneFiltering();
   }
 
+  @HostListener('click', ['$event'])
+  handleHostClick(): void {
+    this.focus();
+  }
+
   @HostListener('window:keydown', ['$event'])
   handleKeydown(event: KeyboardEvent): void {
     if (this.focused) {
