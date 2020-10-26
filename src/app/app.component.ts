@@ -80,4 +80,8 @@ export class AppComponent {
     this.formControl.setErrors({somekey: 'this is an error'});
   }
 
+  get errors(): string[]{
+    return this.formControl.errors ? Object.values(this.formControl.errors) : null;
+  }
+
 }
