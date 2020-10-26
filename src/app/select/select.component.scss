@@ -25,11 +25,21 @@
 }
 
 .item-wrapper {
-  @apply shadow-md bg-white rounded;
+  @apply shadow-md bg-white rounded overflow-y-auto;
+  max-height: 18.75rem;
 }
 
 .item {
-  @apply px-3 h-8 truncate flex items-center text-sm leading-none;
+  @apply px-6 h-8 truncate flex items-center text-sm leading-none;
+}
+
+tw-svg-angle-down {
+  @apply ml-2;
+}
+
+tw-svg-check {
+  @apply absolute ml-2;
+  left: 0;
 }
 
 .item.active {

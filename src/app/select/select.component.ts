@@ -10,13 +10,17 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild
+  QueryList,
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
 import {PopperComponent} from '../popper/popper.component';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER, TAB} from '../util/keycodes.util';
 
 const BLANK_OPTION = {value: null, label: ''} as SelectItemModel;
+const MAX_HEIGHT_PX = 300;
 
 @Component({
   selector: 'tw-select',
@@ -39,13 +43,15 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Output() change = new EventEmitter<any>();
   @ViewChild(PopperComponent) private popper: PopperComponent;
   @ViewChild('filter') private filter: ElementRef;
+  @ViewChild('itemWrapper') private itemWrapper: ElementRef;
+  @ViewChildren('item') private items: QueryList<ElementRef>;
 
   focused = false;
   filtering = false;
   filterTextControl = new FormControl();
   filteredOptions: SelectItemModel[] = [];
+  activeItem: SelectItemModel;
 
-  private activeItem: SelectItemModel;
   private _options: SelectItemModel[] = [];
   private onChange: (_: any) => void;
   private onTouch: () => void;
@@ -67,6 +73,13 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     if (ngControl) {
       this.error = !!ngControl.errors;
     }
+  }
+
+  get selectedItem(): SelectItemModel {
+    if (!this.options) {
+      return null;
+    }
+    return this.options.find(o => o.value === this.value);
   }
 
   get options(): SelectItemModel[] {
@@ -92,6 +105,11 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     return this.options.find(o => o.value === this.value);
   }
 
+  focus(): void {
+    this.focused = true;
+    this.filter.nativeElement.focus();
+  }
+
   handleFocus(): void {
     this.focused = true;
   }
@@ -102,7 +120,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   handleClick(event, option: SelectItemModel): void {
     this.handleSelect(option.value);
-    this.filter.nativeElement.focus();
+    this.focus();
   }
 
   handleMouseEnter(option: SelectItemModel): void {
@@ -139,38 +157,52 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   @HostListener('window:keydown', ['$event'])
   handleKeydown(event: KeyboardEvent): void {
-    if (!this.focused) {
-      return;
+    if (this.focused) {
+      if ((event.key === ENTER || event.key === ARROW_DOWN) && !this.popper.open) {
+        this.popper.show();
+        return;
+      } else if (event.key === TAB) {
+        this.popper.hide();
+        this.doneFiltering();
+        return;
+      } else if (event.key === BACKSPACE && !this.filtering) {
+        this.handleSelect(null);
+        return;
+      } else if (this.isAnyLetterOrSpacePressed(event)) {
+        this.filtering = true;
+        this.popper.show();
+        return;
+      }
     }
 
-    if ((event.key === 'Enter' || event.key === 'ArrowDown') && !this.popper.open) {
-      this.popper.show();
-      return;
-    } else if (event.key === 'Tab') {
-      this.popper.hide();
-      this.doneFiltering();
-      return;
-    } else if (event.key === 'Backspace' && !this.filtering) {
-      this.handleSelect(null);
-      return;
-    } else if (this.isAnyLetterOrSpacePressed(event)) {
-      this.filtering = true;
-      this.popper.show();
-      return;
+    if (this.popper.open) {
+      if (event.key === ENTER && this.activeItem) {
+        this.handleSelect(this.activeItem.value);
+        this.popper.hide();
+      } else if (event.key === ARROW_DOWN) {
+        //FIXME make scrolling work
+        this.activeItem = this.getNextActiveItem(1);
+      } else if (event.key === ARROW_UP) {
+        this.activeItem = this.getNextActiveItem(-1);
+      }
     }
+  }
 
-    if (!this.popper.open) {
-      return;
-    }
-
-    if (event.key === 'Enter' && this.activeItem) {
-      this.handleSelect(this.activeItem.value);
-      this.popper.hide();
-    } else if (event.key === 'ArrowDown') {
-      this.activeItem = this.getActiveItemAtOffset(1);
-    } else if (event.key === 'ArrowUp') {
-      this.activeItem = this.getActiveItemAtOffset(-1);
-    }
+  private refreshScroll(nextActiveElement: ElementRef): void {
+    //this is a mess
+    // if (!nextActiveElement) {
+    //   return;
+    // }
+    // const currentScrollTop = this.itemWrapper.nativeElement.scrollTop;
+    // const nextElementBounds = nextActiveElement.nativeElement.getBoundingClientRect();
+    //
+    // console.log(currentScrollTop, ' : bot :', nextActiveElement.nativeElement.scrollTop);
+    // if (nextElementBounds.top < currentScrollTop) {
+    //   this.itemWrapper.nativeElement.scrollTop = nextElementBounds.top;
+    // } else if (nextElementBounds.bottom > (currentScrollTop + MAX_HEIGHT_PX)) {
+    //
+    //   this.itemWrapper.nativeElement.scrollTop = nextElementBounds.bottom - MAX_HEIGHT_PX;
+    // }
   }
 
   private registerFilterTextChanges(): void {
@@ -183,7 +215,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     return /^.$/u.test(event.key);
   }
 
-  private getActiveItemAtOffset(offset: number): SelectItemModel {
+  private getNextActiveItem(offset: number): SelectItemModel {
     if (!this.filteredOptions || this.filteredOptions.length === 0) {
       return null;
     }
@@ -203,6 +235,30 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
       return this.filteredOptions[this.filteredOptions.length - 1];
     }
     return this.filteredOptions[nextIndex];
+  }
+
+  private getNextActiveElement(offset: number): ElementRef {
+    const items = this.items.toArray();
+    if (!items || items.length === 0) {
+      return null;
+    }
+
+    const currentIndex = items.findIndex(e => e.nativeElement.classList.contains('active'));
+    if (currentIndex === -1 && offset === 1) {
+      return items[0];
+    }
+    if (currentIndex === -1 && offset === -1) {
+      return null;
+    }
+
+    const nextIndex = currentIndex + offset;
+
+    if (nextIndex < 0) {
+      return items[0];
+    } else if (nextIndex >= this.items.length) {
+      return items[items.length - 1];
+    }
+    return items[nextIndex];
   }
 
   private refreshFilteredOptions(): void {

@@ -6,7 +6,8 @@ import {AppComponent} from './app.component';
 import {PopperComponent} from './popper/popper.component';
 import {SelectComponent} from './select/select.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {SvgAngleDownComponent} from './svg-angle-down/svg-angle-down.component';
+import {SvgAngleDownComponent} from './svg/svg-angle-down.component';
+import {SvgCheckComponent} from './svg/svg-check.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {SvgAngleDownComponent} from './svg-angle-down/svg-angle-down.component';
     AppComponent,
     PopperComponent,
     SelectComponent,
-    SvgAngleDownComponent
+    SvgAngleDownComponent,
+    SvgCheckComponent
   ],
   imports: [
     BrowserModule,

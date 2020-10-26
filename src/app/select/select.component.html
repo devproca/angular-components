@@ -14,16 +14,16 @@
              (focusout)="handleUnfocus()"
              [formControl]="filterTextControl">
     </div>
-    <div class="pl-2">
-      <tw-svg-angle-down></tw-svg-angle-down>
-    </div>
+    <tw-svg-angle-down></tw-svg-angle-down>
   </div>
-  <div (mouseleave)="handleMouseLeave()" class="item-wrapper">
+  <div (mouseleave)="handleMouseLeave()" #itemWrapper class="item-wrapper">
     <div (click)="handleClick($event, option)"
          (mouseenter)="handleMouseEnter(option)"
          *ngFor="let option of filteredOptions"
          [class.active]="option === activeItem"
+         #item
          class="item">
+      <tw-svg-check class="small" *ngIf="option === selectedItem"></tw-svg-check>
       {{option.label}}
     </div>
   </div>

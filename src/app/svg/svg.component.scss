@@ -1,0 +1,9 @@
+:host(.small) {
+  svg {
+    @apply h-3;
+  }
+}
+
+svg {
+  @apply text-gray-600 h-4 leading-none;
+}

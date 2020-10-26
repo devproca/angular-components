@@ -37,6 +37,34 @@ export class AppComponent {
     {
       value: 'SEVEN',
       label: 'Seven'
+    },
+    {
+      value: 'EIGHT',
+      label: 'Eight'
+    },
+    {
+      value: 'NINE',
+      label: 'Nine'
+    },
+    {
+      value: 'TEN',
+      label: 'Ten'
+    },
+    {
+      value: 'ELEVEN',
+      label: 'Eleven'
+    },
+    {
+      value: 'TWELVE',
+      label: 'Twelve'
+    },
+    {
+      value: 'THIRTEEN',
+      label: 'Thirteen'
+    },
+    {
+      value: 'FOURTEEN',
+      label: 'Fourteen'
     }
   ];
 
