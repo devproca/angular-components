@@ -19,7 +19,6 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl} from '@
 import {Subscription} from 'rxjs';
 import {ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER, TAB} from '../util/keycodes.util';
 
-const BLANK_OPTION = {value: null, label: ''} as SelectItemModel;
 const MAX_HEIGHT_PX = 300;
 
 @Component({
@@ -89,9 +88,9 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Input()
   set options(options: SelectItemModel[]) {
     if (!options) {
-      this._options = [BLANK_OPTION];
+      this._options = [];
     } else {
-      this._options = [BLANK_OPTION, ...options];
+      this._options = [...options];
     }
     this.refreshFilteredOptions();
   }
