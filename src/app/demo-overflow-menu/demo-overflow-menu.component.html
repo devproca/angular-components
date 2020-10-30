@@ -4,3 +4,23 @@
     <tw-overflow-menu [options]="options"></tw-overflow-menu>
   </div>
 </div>
+
+
+<div class="m-10">
+  <div class="text-lg mb-4">Overflow menu using template</div>
+  <div class="border rounded p-6">
+    <tw-overflow-menu [options]="options" [template]="itemTemplate"></tw-overflow-menu>
+  </div>
+</div>
+
+<ng-template #itemTemplate let-option>
+  <div>
+    <div>
+      {{option.label}}
+    </div>
+    <div class="text-xs text-gray-500">
+      This could be how selects and autocompletes template their rows
+    </div>
+  </div>
+
+</ng-template>

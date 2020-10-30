@@ -4,7 +4,11 @@
   </div>
   <div class="item-wrapper">
       <div class="item" *ngFor="let option of options" (click)="option.click()">
-        {{option.label}}
+        <ng-container *ngTemplateOutlet="template ? template : defaultTemplate; context: {$implicit: option}"></ng-container>
       </div>
   </div>
 </tw-popper>
+
+<ng-template #defaultTemplate let-option>
+  {{option.label}}
+</ng-template>

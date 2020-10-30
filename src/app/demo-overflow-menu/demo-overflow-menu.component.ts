@@ -5,7 +5,7 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './demo-overflow-menu.component.html',
   styleUrls: ['./demo-overflow-menu.component.scss']
 })
-export class DemoOverflowMenuComponent implements OnInit {
+export class DemoOverflowMenuComponent {
 
   options = [
     {

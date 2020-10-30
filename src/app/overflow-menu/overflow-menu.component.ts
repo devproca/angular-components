@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, TemplateRef} from '@angular/core';
 
 @Component({
   selector: 'tw-overflow-menu',
@@ -8,6 +8,10 @@ import {Component, Input} from '@angular/core';
 export class OverflowMenuComponent {
 
   @Input() options: OverflowMenuModel[];
+
+  @Input() template: TemplateRef<any>;
+
+
 }
 
 
