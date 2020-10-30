@@ -8,6 +8,10 @@ import {SelectComponent} from './select/select.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SvgAngleDownComponent} from './svg/svg-angle-down.component';
 import {SvgCheckComponent} from './svg/svg-check.component';
+import {SvgElipsisVerticalComponent} from './svg/svg-elipsis-vertical.component';
+import { OverflowMenuComponent } from './overflow-menu/overflow-menu.component';
+import { DemoSelectComponent } from './demo-select/demo-select.component';
+import { DemoOverflowMenuComponent } from './demo-overflow-menu/demo-overflow-menu.component';
 
 
 @NgModule({
@@ -16,7 +20,11 @@ import {SvgCheckComponent} from './svg/svg-check.component';
     PopperComponent,
     SelectComponent,
     SvgAngleDownComponent,
-    SvgCheckComponent
+    SvgCheckComponent,
+    SvgElipsisVerticalComponent,
+    OverflowMenuComponent,
+    DemoSelectComponent,
+    DemoOverflowMenuComponent
   ],
   imports: [
     BrowserModule,

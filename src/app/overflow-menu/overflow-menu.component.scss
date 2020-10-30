@@ -1,0 +1,22 @@
+.menu-wrapper {
+  @apply w-8 h-8 flex items-center justify-center rounded-full text-gray-700 cursor-pointer;
+  transition: background-color 150ms ease-in;
+}
+
+.menu-wrapper:hover,
+.menu-wrapper.active {
+  @apply bg-gray-100 ;
+}
+
+.item-wrapper {
+  @apply shadow-md bg-white rounded;
+  min-width: 8rem;
+}
+
+.item {
+  @apply flex items-center text-sm text-gray-700 px-4 py-2 cursor-pointer;
+ }
+
+.item:hover {
+  @apply bg-gray-100;
+}

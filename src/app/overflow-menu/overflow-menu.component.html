@@ -1,0 +1,10 @@
+<tw-popper [hideOnClick]="true">
+  <div class="menu-wrapper">
+    <tw-elipsis-vertical></tw-elipsis-vertical>
+  </div>
+  <div class="item-wrapper">
+      <div class="item" *ngFor="let option of options" (click)="option.click()">
+        {{option.label}}
+      </div>
+  </div>
+</tw-popper>
