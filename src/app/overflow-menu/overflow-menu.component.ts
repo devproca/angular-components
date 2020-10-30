@@ -1,4 +1,5 @@
-import {Component, Input, TemplateRef} from '@angular/core';
+import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
+import {PopperComponent} from '../popper/popper.component';
 
 @Component({
   selector: 'tw-overflow-menu',
@@ -11,6 +12,7 @@ export class OverflowMenuComponent {
 
   @Input() template: TemplateRef<any>;
 
+  @ViewChild(PopperComponent) popper: PopperComponent;
 
 }
 

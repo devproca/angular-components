@@ -1,5 +1,6 @@
 <tw-popper [hideOnClick]="true">
-  <div class="menu-wrapper">
+  <div class="menu-wrapper"
+    [class.active]="popper?.open">
     <tw-elipsis-vertical></tw-elipsis-vertical>
   </div>
   <div class="item-wrapper">
