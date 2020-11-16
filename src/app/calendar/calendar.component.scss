@@ -1,0 +1,97 @@
+.calendar {
+  @apply rounded shadow-md bg-white font-sans p-3;
+  width: 17.5rem;
+  overflow-x: hidden;
+  box-sizing: content-box;
+
+  .calendar-nav {
+    @apply w-full flex flex-grow justify-between;
+    > div {
+      @apply flex;
+    }
+
+    > div > div {
+      @apply flex items-center;
+    }
+
+    .month,
+    .year {
+      text-align: center;
+      width: 2.5rem;
+    }
+
+    button {
+      @apply border-none bg-white text-base m-0 cursor-pointer text-blue-500;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button.today {
+      @apply text-sm;
+    }
+
+    button.chevron {
+      @apply py-0 h-6 w-6 flex items-center justify-center;
+    }
+  }
+
+  .calendar-weekdays {
+    @apply w-full flex py-1 mt-2;
+    div {
+      @apply w-10 text-center text-gray-700;
+    }
+  }
+
+  .calendar-cells {
+    @apply w-full flex flex-wrap cursor-pointer;
+    > div {
+      @apply text-center;
+      &.disabled {
+        @apply cursor-auto;
+        > div {
+          @apply text-gray-400;
+          &:hover {
+            @apply border-2 border-solid border-white text-gray-400;
+          }
+        }
+      }
+
+      &.today {
+        > div {
+          @apply text-blue-500;
+        }
+      }
+
+      &.selected {
+        > div {
+          @apply border-2 border-solid border-blue-200 bg-blue-500 text-white;
+        }
+      }
+
+      &.selected-error {
+        > div {
+          @apply border-2 border-solid border-red-200 bg-red-300 text-white;
+        }
+      }
+
+      > .day {
+        @apply rounded-full h-10 w-10 flex items-center justify-center border-2 border-solid border-white;
+
+        &:hover {
+          @apply border-2 border-solid border-blue-300 bg-white text-black;
+          transition: all .2s;
+        }
+      }
+
+      > .day-error {
+        @apply rounded-full h-10 w-10 flex items-center justify-center border-2 border-solid border-white;
+
+        &:hover {
+          @apply border-2 border-solid border-red-300 bg-white text-black;
+          transition: all .2s;
+        }
+      }
+    }
+  }
+}

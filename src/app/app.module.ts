@@ -12,6 +12,11 @@ import {SvgElipsisVerticalComponent} from './svg/svg-elipsis-vertical.component'
 import {OverflowMenuComponent} from './overflow-menu/overflow-menu.component';
 import {DemoSelectComponent} from './demo-select/demo-select.component';
 import {DemoOverflowMenuComponent} from './demo-overflow-menu/demo-overflow-menu.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { DatePickerComponent } from './date-picker/date-picker.component';
+import { DateInputComponent } from './date-input/date-input.component';
+import {SvgAngleLeftComponent} from './svg/svg-angle-left.component';
+import {SvgAngleRightComponent} from './svg/svg-angle-right.component';
 
 
 @NgModule({
@@ -20,11 +25,16 @@ import {DemoOverflowMenuComponent} from './demo-overflow-menu/demo-overflow-menu
     PopperComponent,
     SelectComponent,
     SvgAngleDownComponent,
+    SvgAngleLeftComponent,
+    SvgAngleRightComponent,
     SvgCheckComponent,
     SvgElipsisVerticalComponent,
     OverflowMenuComponent,
     DemoSelectComponent,
-    DemoOverflowMenuComponent
+    DemoOverflowMenuComponent,
+    CalendarComponent,
+    DatePickerComponent,
+    DateInputComponent
   ],
   imports: [
     BrowserModule,

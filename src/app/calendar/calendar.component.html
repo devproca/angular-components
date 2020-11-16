@@ -1,0 +1,39 @@
+<div class="calendar">
+  <div class="calendar-nav">
+    <div>
+      <div>
+        <button class="chevron" (click)="changeMonth(-1)">
+          <tw-svg-angle-left></tw-svg-angle-left>
+        </button>
+        <div class="month">{{navigationMonthLabel}}</div>
+        <button class="chevron" (click)="changeMonth(1)">
+          <tw-svg-angle-right></tw-svg-angle-right>
+        </button>
+      </div>
+      <div>
+        <button class="chevron" (click)="changeYear(-1)">
+          <tw-svg-angle-left></tw-svg-angle-left>
+        </button>
+        <div class="year">{{navigationYearLabel}}</div>
+        <button class="chevron" (click)="changeYear(1)">
+          <tw-svg-angle-right></tw-svg-angle-right>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="calendar-weekdays">
+    <div *ngFor="let weekdayLabel of weekdayLabels">
+      <div><small>{{weekdayLabel}}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="calendar-cells">
+      <div (click)="selectDate(cell)" *ngFor="let cell of calendarCells"
+           [class.disabled]="cell.disabled"
+           [class.today]="cell.today"
+           [class.selected]="cell.isoDate && cell.isoDate === value">
+        <div class="day">{{cell.day ? cell.day : ''}}</div>
+      </div>
+    </div>
+</div>

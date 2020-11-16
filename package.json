@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~10.0.11",
     "@angular/router": "~10.0.11",
     "ngx-build-plus": "^10.1.1",
+    "luxon": "^1.15.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
