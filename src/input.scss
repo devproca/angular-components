@@ -9,7 +9,7 @@
 .tw-input {
   @apply appearance-none outline-none leading-none px-3 h-8 text-sm bg-white border border-solid border-gray-400 rounded w-full text-gray-900;
   box-sizing: border-box;
-  transition: all 150ms ease-in;
+  transition: border-color 150ms ease-in, box-shadow 150ms ease-in;
 }
 
 .tw-input-focus {

@@ -1,4 +1,4 @@
-import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {PopperComponent} from '../popper/popper.component';
 
 @Component({
@@ -6,7 +6,7 @@ import {PopperComponent} from '../popper/popper.component';
   templateUrl: './overflow-menu.component.html',
   styleUrls: ['./overflow-menu.component.scss']
 })
-export class OverflowMenuComponent {
+export class OverflowMenuComponent implements OnDestroy, AfterViewInit {
 
   @Input() options: OverflowMenuModel[];
 
@@ -14,6 +14,16 @@ export class OverflowMenuComponent {
 
   @ViewChild(PopperComponent) popper: PopperComponent;
 
+  constructor(private changeDetectorRef: ChangeDetectorRef) {
+  }
+
+  ngOnDestroy(): void {
+    this.changeDetectorRef.detach();
+  }
+
+  ngAfterViewInit(): void {
+    this.changeDetectorRef.detectChanges();
+  }
 }
 
 

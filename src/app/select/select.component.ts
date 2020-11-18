@@ -194,23 +194,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     }
   }
 
-  private refreshScroll(nextActiveElement: ElementRef): void {
-    //this is a mess
-    // if (!nextActiveElement) {
-    //   return;
-    // }
-    // const currentScrollTop = this.itemWrapper.nativeElement.scrollTop;
-    // const nextElementBounds = nextActiveElement.nativeElement.getBoundingClientRect();
-    //
-    // console.log(currentScrollTop, ' : bot :', nextActiveElement.nativeElement.scrollTop);
-    // if (nextElementBounds.top < currentScrollTop) {
-    //   this.itemWrapper.nativeElement.scrollTop = nextElementBounds.top;
-    // } else if (nextElementBounds.bottom > (currentScrollTop + MAX_HEIGHT_PX)) {
-    //
-    //   this.itemWrapper.nativeElement.scrollTop = nextElementBounds.bottom - MAX_HEIGHT_PX;
-    // }
-  }
-
   private registerFilterTextChanges(): void {
     this.subscriptions.push(this.filterTextControl.valueChanges.subscribe(v => {
       this.refreshFilteredOptions();

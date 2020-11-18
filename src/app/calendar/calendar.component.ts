@@ -24,11 +24,11 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.initializeDaysOfWeek();
-    this.initializeNavigationDate();
+    this.refreshNavigationDate();
   }
 
   ngOnChanges(): void {
-    this.refreshCells();
+    this.refreshNavigationDate();
   }
 
   changeMonth(num: number): void {
@@ -58,17 +58,22 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.weekdayLabels = [0, 1, 2, 3, 4, 5, 6].map(i => DateTime.local().set({weekday: i}).setLocale(this.locale).toFormat('ccc'));
   }
 
-  private initializeNavigationDate(): void {
+  private refreshNavigationDate(): void {
     const currentDate = DateTime.local();
-    let initialNavigationDate = currentDate;
-    if (this.maxDate && this.maxDate < currentDate.toISODate()) {
-      initialNavigationDate = DateTime.fromISO(this.maxDate).startOf('month');
-    } else if (this.minDate && this.minDate > currentDate.toISODate()) {
-      initialNavigationDate = DateTime.fromISO(this.minDate).startOf('month');
+    let nextNavigationDate = currentDate;
+
+    if (this.value) {
+      nextNavigationDate = DateTime.fromISO(this.value).startOf('month');
     } else {
-      initialNavigationDate = currentDate.startOf('month');
+      if (this.maxDate && this.maxDate < currentDate.toISODate()) {
+        nextNavigationDate = DateTime.fromISO(this.maxDate).startOf('month');
+      } else if (this.minDate && this.minDate > currentDate.toISODate()) {
+        nextNavigationDate = DateTime.fromISO(this.minDate).startOf('month');
+      } else {
+        nextNavigationDate = currentDate.startOf('month');
+      }
     }
-    this.updateNavigationDate(initialNavigationDate);
+    this.updateNavigationDate(nextNavigationDate);
   }
 
   private updateNavigationDate(value: DateTime): void {

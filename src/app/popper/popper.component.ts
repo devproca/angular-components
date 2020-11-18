@@ -64,6 +64,8 @@ export class PopperComponent implements OnInit, OnDestroy, AfterContentInit {
     this.open = true;
     this.setContentStyleDisplay('block');
     this.updateContentWidth();
+    this.popperInstance.scheduleUpdate();
+
   }
 
   update(): void {

@@ -1,0 +1,9 @@
+@import '../../input.scss';
+
+.input-wrapper {
+  @apply flex items-center;
+}
+
+input {
+  @apply outline-none text-gray-800 h-full w-full cursor-default;
+}

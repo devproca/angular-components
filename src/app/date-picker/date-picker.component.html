@@ -1,1 +1,19 @@
-<p>date-picker works!</p>
+<div class="input-wrapper"
+     [class.tw-input]="true"
+     [class.tw-input-disabled]="disabled"
+     [class.tw-input-error]="error"
+     [class.tw-input-focus]="focused">
+  <input (focusin)="handleFocus()"
+         (focusout)="handleUnfocus()"
+         (input)="handleInput($event)"
+         [value]="value ? value : ''"
+         [placeholder]="placeholder ? placeholder : ''"
+         [disabled]="disabled">
+  <tw-popper>
+    <tw-svg-calendar></tw-svg-calendar>
+    <tw-calendar [value]="value"
+                 [minDate]="minDate"
+                 [maxDate]="maxDate"
+                 (change)="handleCalendarChange($event)"></tw-calendar>
+  </tw-popper>
+</div>
