@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Inject, Input, LOCALE_ID, OnChanges, OnInit, Output} from '@angular/core';
 import {DateTime} from 'luxon';
+import {isValidForMax, isValidForMin} from '../util/date.util';
 
 @Component({
   selector: 'tw-calendar',
@@ -95,7 +96,8 @@ export class CalendarComponent implements OnInit, OnChanges {
         isoDate: isoDate,
         day: dayIndex,
         today: isoDate === DateTime.local().toISODate(),
-        disabled: false
+        disabled: (this.maxDate && !isValidForMax(isoDate, this.maxDate)) ||
+          (this.minDate && !isValidForMin(isoDate, this.minDate))
       } as CellMetadata;
     });
 
