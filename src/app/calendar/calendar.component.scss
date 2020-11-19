@@ -1,7 +1,6 @@
 .calendar {
-  @apply rounded shadow-md bg-white font-sans p-3;
+  @apply rounded shadow-md bg-white font-sans p-3 overflow-x-hidden;
   width: 17.5rem;
-  overflow-x: hidden;
   box-sizing: content-box;
 
   .calendar-nav {
@@ -16,14 +15,13 @@
 
     .month,
     .year {
-      text-align: center;
-      width: 2.5rem;
+      @apply text-center w-10;
     }
 
     button {
       @apply border-none bg-white text-base m-0 cursor-pointer text-blue-500;
       &:focus {
-        outline: none;
+        @apply outline-none;
       }
     }
 
