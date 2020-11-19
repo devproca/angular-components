@@ -3,7 +3,8 @@
      [class.tw-input-disabled]="disabled"
      [class.tw-input-error]="error"
      [class.tw-input-focus]="focused">
-  <input (focusin)="handleFocus()"
+  <input #ref
+         (focusin)="handleFocus()"
          (focusout)="handleUnfocus()"
          (input)="handleInput($event)"
          [value]="value ? value : ''"

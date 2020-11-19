@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   DoCheck,
+  ElementRef,
   EventEmitter,
   forwardRef,
   Injector,
@@ -20,7 +21,7 @@ import {
   Validator
 } from '@angular/forms';
 import {PopperComponent} from '../popper/popper.component';
-import {isValidDate, isValidForMax, isValidForMin} from '../util/date.util';
+import {formatDate, isValidDate, isValidForMax, isValidForMin} from '../util/date.util';
 
 @Component({
   selector: 'tw-date-picker',
@@ -52,6 +53,7 @@ export class DatePickerComponent implements OnDestroy, ControlValueAccessor, Val
   @Input() maxDate;
   @Output() change = new EventEmitter<string>();
   @ViewChild(PopperComponent) private popper: PopperComponent;
+  @ViewChild('ref') private input: ElementRef;
 
   focused = false;
   error = false;
@@ -76,7 +78,19 @@ export class DatePickerComponent implements OnDestroy, ControlValueAccessor, Val
   }
 
   handleInput($event: Event): void {
-    this.value = ($event.target as any).value;
+    const currentValue = ($event.target as any).value;
+    const formattedCurrentValue = formatDate(currentValue);
+    const currentKey = ($event as any).data;
+
+    const cursorPosition = this.input.nativeElement.selectionStart;
+    const currentValueToCursor = currentValue.substr(0, cursorPosition);
+    const currentValueToCursorFormatted = formatDate(currentValueToCursor);
+    const offsetRequired = currentKey == null ? 0 : this.calculateNumberOfInsertedDashes(currentValueToCursor, currentValueToCursorFormatted);
+    const nextCursorPosition = cursorPosition + offsetRequired;
+
+    this.input.nativeElement.value = formattedCurrentValue;
+    this.input.nativeElement.setSelectionRange(nextCursorPosition, nextCursorPosition);
+    this.value = formattedCurrentValue;
     this.clearErrors();
   }
 
@@ -146,5 +160,11 @@ export class DatePickerComponent implements OnDestroy, ControlValueAccessor, Val
       this.onTouch();
     }
     this.change.emit(newValue);
+  }
+
+  private calculateNumberOfInsertedDashes(first: string, second: string): number {
+    const n1 = first ? first.split('-').length - 1 : 0;
+    const n2 = second ? second.split('-').length - 1 : 0;
+    return n2 - n1;
   }
 }

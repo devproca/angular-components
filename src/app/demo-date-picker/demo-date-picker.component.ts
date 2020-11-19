@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'tw-demo-date-picker',
@@ -7,7 +7,7 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./demo-date-picker.component.scss']
 })
 export class DemoDatePickerComponent {
-  formControl = new FormControl('2016-11-16');
+  formControl = new FormControl('2016-03-03');
 
   enable(): void {
     this.formControl.enable();
