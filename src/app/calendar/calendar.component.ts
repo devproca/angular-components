@@ -34,10 +34,12 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   changeMonth(num: number): void {
     this.updateNavigationDate(this.navigationDate.plus({months: num}));
+    this.calendarMonthChange.emit(this.navigationDate);
   }
 
   changeYear(num: number): void {
     this.updateNavigationDate(this.navigationDate.plus({years: num}));
+    this.calendarYearChange.emit(this.navigationDate);
   }
 
   selectDate(cell: CellMetadata): void {
