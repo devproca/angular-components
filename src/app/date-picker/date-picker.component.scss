@@ -1,5 +1,9 @@
 @import '../../input.scss';
 
+:host {
+  @apply block;
+}
+
 .input-wrapper {
   @apply flex items-center;
 }
