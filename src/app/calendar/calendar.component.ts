@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, Input, LOCALE_ID, OnChanges, OnInit, Output} from '@angular/core';
 import {DateTime} from 'luxon';
-import {isValidForMax, isValidForMin} from '../util/date.util';
+import {isValidDate, isValidForMax, isValidForMin} from '../util/date.util';
 
 @Component({
   selector: 'tw-calendar',
@@ -64,7 +64,9 @@ export class CalendarComponent implements OnInit, OnChanges {
     let nextNavigationDate = currentDate;
 
     if (this.value) {
-      nextNavigationDate = DateTime.fromISO(this.value).startOf('month');
+      if (isValidDate(this.value)) {
+        nextNavigationDate = DateTime.fromISO(this.value).startOf('month');
+      }
     } else {
       if (this.maxDate && this.maxDate < currentDate.toISODate()) {
         nextNavigationDate = DateTime.fromISO(this.maxDate).startOf('month');
