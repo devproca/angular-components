@@ -1,3 +1,4 @@
+import {ScrollToActiveDirective} from './select/scroll-to-active.directive';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
@@ -36,7 +37,8 @@ import {SvgCalendarComponent} from './svg/svg-calendar.component';
     DemoOverflowMenuComponent,
     CalendarComponent,
     DatePickerComponent,
-    DemoDatePickerComponent
+    DemoDatePickerComponent,
+    ScrollToActiveDirective
   ],
   imports: [
     BrowserModule,

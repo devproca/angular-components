@@ -17,12 +17,15 @@
     <tw-svg-angle-down></tw-svg-angle-down>
   </div>
   <div (mouseleave)="handleMouseLeave()" #itemWrapper class="item-wrapper">
-    <div (click)="handleClick($event, option)"
+    <div (click)="handleClick(option)"
          (mouseenter)="handleMouseEnter(option)"
          *ngFor="let option of filteredOptions"
          [class.active]="option === activeItem"
          #item
-         class="item">
+         class="item"
+         twScrollToActive
+         scrollToActiveClass="active"
+         [scrollToActiveElement]="itemWrapper">
       <tw-svg-check class="small" *ngIf="option === selectedItem"></tw-svg-check>
       {{option.label}}
     </div>
