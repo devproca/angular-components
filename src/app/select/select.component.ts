@@ -17,7 +17,7 @@ import {
 import {PopperComponent} from '../popper/popper.component';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER, TAB} from '../util/keycodes.util';
+import {ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER, ESCAPE, TAB} from '../util/keycodes.util';
 
 const MAX_HEIGHT_PX = 300;
 
@@ -42,8 +42,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @Output() change = new EventEmitter<any>();
   @ViewChild(PopperComponent) private popper: PopperComponent;
   @ViewChild('filter') private filter: ElementRef;
-  @ViewChild('itemWrapper') private itemWrapper: ElementRef;
-  @ViewChildren('item') private items: QueryList<ElementRef>;
 
   focused = false;
   filtering = false;
@@ -117,7 +115,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.focused = false;
   }
 
-  handleClick(event, option: SelectItemModel): void {
+  handleClick(option: SelectItemModel): void {
     this.handleSelect(option.value);
     this.focus();
   }
@@ -164,20 +162,16 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   @HostListener('window:keydown', ['$event'])
   handleKeydown(event: KeyboardEvent): void {
     if (this.focused) {
-      if ((event.key === ENTER || event.key === ARROW_DOWN) && !this.popper.open) {
+      if (event.key === ARROW_DOWN || event.key === ARROW_UP) {
         this.popper.show();
-        return;
-      } else if (event.key === TAB) {
+      } else if (event.key === TAB || event.key === ESCAPE) {
         this.popper.hide();
         this.doneFiltering();
-        return;
       } else if (event.key === BACKSPACE && !this.filtering) {
         this.handleSelect(null);
-        return;
       } else if (this.isAnyLetterOrSpacePressed(event)) {
         this.filtering = true;
         this.popper.show();
-        return;
       }
     }
 
@@ -185,11 +179,13 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
       if (event.key === ENTER && this.activeItem) {
         this.handleSelect(this.activeItem.value);
         this.popper.hide();
+        event.preventDefault();
       } else if (event.key === ARROW_DOWN) {
-        //FIXME make scrolling work
         this.activeItem = this.getNextActiveItem(1);
+        event.preventDefault();
       } else if (event.key === ARROW_UP) {
         this.activeItem = this.getNextActiveItem(-1);
+        event.preventDefault();
       }
     }
   }
@@ -197,6 +193,9 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   private registerFilterTextChanges(): void {
     this.subscriptions.push(this.filterTextControl.valueChanges.subscribe(v => {
       this.refreshFilteredOptions();
+      if (this.filteredOptions?.length && this.filteredOptions.length < this.options.length) {
+        this.activeItem = this.filteredOptions[0];
+      }
     }));
   }
 
@@ -214,7 +213,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     }
 
     if (!this.activeItem && offset === -1) {
-      return null;
+      return this.filteredOptions[this.filteredOptions.length - 1];
     }
 
     const nextIndex = this.filteredOptions.findIndex(o => o.value === this.activeItem.value) + offset;
@@ -224,30 +223,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
       return this.filteredOptions[this.filteredOptions.length - 1];
     }
     return this.filteredOptions[nextIndex];
-  }
-
-  private getNextActiveElement(offset: number): ElementRef {
-    const items = this.items.toArray();
-    if (!items || items.length === 0) {
-      return null;
-    }
-
-    const currentIndex = items.findIndex(e => e.nativeElement.classList.contains('active'));
-    if (currentIndex === -1 && offset === 1) {
-      return items[0];
-    }
-    if (currentIndex === -1 && offset === -1) {
-      return null;
-    }
-
-    const nextIndex = currentIndex + offset;
-
-    if (nextIndex < 0) {
-      return items[0];
-    } else if (nextIndex >= this.items.length) {
-      return items[items.length - 1];
-    }
-    return items[nextIndex];
   }
 
   private refreshFilteredOptions(): void {
