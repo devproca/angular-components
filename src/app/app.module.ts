@@ -19,6 +19,8 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
 import {SvgAngleLeftComponent} from './svg/svg-angle-left.component';
 import {SvgAngleRightComponent} from './svg/svg-angle-right.component';
 import {SvgCalendarComponent} from './svg/svg-calendar.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { RandomComponentComponent } from './random-component/random-component.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import {SvgCalendarComponent} from './svg/svg-calendar.component';
     CalendarComponent,
     DatePickerComponent,
     DemoDatePickerComponent,
-    ScrollToActiveDirective
+    ScrollToActiveDirective,
+    DialogComponent,
+    RandomComponentComponent
   ],
   imports: [
     BrowserModule,

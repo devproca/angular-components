@@ -1,0 +1,7 @@
+.overlay {
+  @apply z-20 fixed flex items-center justify-center h-full w-full;
+}
+
+.dialog {
+  @apply shadow rounded bg-white;
+}
