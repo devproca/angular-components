@@ -1,7 +1,24 @@
 .overlay {
-  @apply z-20 fixed flex items-center justify-center h-full w-full;
+  @apply z-20 fixed flex items-center justify-center bg-gray-800 h-full w-full inset-0;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .dialog {
-  @apply shadow rounded bg-white;
+  @apply shadow-lg rounded bg-white overflow-hidden;
+}
+
+.dialog.xs {
+  max-width: 20rem;
+}
+
+.dialog.sm {
+  max-width: 40rem;
+}
+
+.dialog.md {
+  max-width: 60rem;
+}
+
+.dialog.lg {
+  max-width: 80rem;
 }

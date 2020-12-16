@@ -1,15 +1,17 @@
 import {
-  AfterViewInit, ChangeDetectorRef,
+  AfterViewInit,
+  ChangeDetectorRef,
   Component,
-  ComponentFactoryResolver, Inject, InjectionToken,
+  ComponentFactoryResolver,
   OnDestroy,
-  OnInit, Type,
+  OnInit,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
 import {Event, NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {DialogRef} from './dialog.ref';
+import {DialogConfig} from './dialog-config.model';
 
 
 @Component({
@@ -21,15 +23,19 @@ export class DialogComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('ref', {read: ViewContainerRef}) viewContainerRef: ViewContainerRef;
 
-  private subscriptions: Subscription[] = [];
+  size: string;
+
+  subscriptions: Subscription[] = [];
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private changeDetectorRef: ChangeDetectorRef,
               private router: Router,
+              private dialogConfig: DialogConfig,
               private dialogRef: DialogRef) {
   }
 
   ngOnInit(): void {
+    this.initializeSize();
     this.handleCloseWhenRouteChanges();
   }
 
@@ -44,6 +50,14 @@ export class DialogComponent implements OnInit, OnDestroy, AfterViewInit {
 
   close(result?: any): void {
     this.dialogRef.close(result);
+  }
+
+  private initializeSize(): void {
+    if (this.dialogConfig.size) {
+      this.size = this.dialogConfig.size;
+    } else {
+      this.size = 'md';
+    }
   }
 
   private loadDynamicComponent(): void {

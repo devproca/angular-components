@@ -97,7 +97,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       const dayIndex = i + 1;
       const isoDate = this.navigationDate.set({day: dayIndex}).toISODate();
       return {
-        isoDate: isoDate,
+        isoDate,
         day: dayIndex,
         today: isoDate === DateTime.local().toISODate(),
         disabled: (this.maxDate && !isValidForMax(isoDate, this.maxDate)) ||

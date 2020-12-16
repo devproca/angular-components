@@ -1,4 +1,4 @@
-import { Directive, DoCheck, ElementRef, Input } from '@angular/core';
+import {Directive, DoCheck, ElementRef, Input} from '@angular/core';
 
 @Directive({
   selector: '[twScrollToActive]'
@@ -15,7 +15,7 @@ export class ScrollToActiveDirective implements DoCheck {
     if (this.scrollToActiveElement
         && this.el.nativeElement.classList.contains(this.scrollToActiveClass)
         && this.isOutsideView()) {
-      this.el.nativeElement.scrollIntoView({block: "nearest"});
+      this.el.nativeElement.scrollIntoView({block: 'nearest'});
     }
   }
 

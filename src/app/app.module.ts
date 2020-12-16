@@ -19,8 +19,12 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
 import {SvgAngleLeftComponent} from './svg/svg-angle-left.component';
 import {SvgAngleRightComponent} from './svg/svg-angle-right.component';
 import {SvgCalendarComponent} from './svg/svg-calendar.component';
-import { DialogComponent } from './dialog/dialog.component';
-import { RandomComponentComponent } from './random-component/random-component.component';
+import {DialogComponent} from './dialog/dialog.component';
+import {RandomComponentComponent} from './random-component/random-component.component';
+import {DialogHeaderComponent} from './dialog-header/dialog-header.component';
+import {DialogBodyComponent} from './dialog-body/dialog-body.component';
+import {DialogFooterComponent} from './dialog-footer/dialog-footer.component';
+import {DemoDialogComponent} from './demo-dialog/demo-dialog.component';
 
 
 @NgModule({
@@ -42,7 +46,11 @@ import { RandomComponentComponent } from './random-component/random-component.co
     DemoDatePickerComponent,
     ScrollToActiveDirective,
     DialogComponent,
-    RandomComponentComponent
+    RandomComponentComponent,
+    DialogHeaderComponent,
+    DialogBodyComponent,
+    DialogFooterComponent,
+    DemoDialogComponent
   ],
   imports: [
     BrowserModule,

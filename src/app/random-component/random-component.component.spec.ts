@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RandomComponentComponent } from './random-component.component';
+import {RandomComponentComponent} from './random-component.component';
 
 describe('RandomComponentComponent', () => {
   let component: RandomComponentComponent;

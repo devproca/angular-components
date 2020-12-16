@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {DemoDatePickerComponent} from './demo-date-picker.component';
+import {DialogBodyComponent} from './dialog-body.component';
 
-describe('DemoDatePickerComponent', () => {
-  let component: DemoDatePickerComponent;
-  let fixture: ComponentFixture<DemoDatePickerComponent>;
+describe('DialogBodyComponent', () => {
+  let component: DialogBodyComponent;
+  let fixture: ComponentFixture<DialogBodyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DemoDatePickerComponent ]
+      declarations: [ DialogBodyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DemoDatePickerComponent);
+    fixture = TestBed.createComponent(DialogBodyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

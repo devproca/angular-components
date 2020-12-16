@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { OverflowMenuComponent } from './overflow-menu.component';
+import {OverflowMenuComponent} from './overflow-menu.component';
 
 describe('OverflowMenuComponent', () => {
   let component: OverflowMenuComponent;

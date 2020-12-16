@@ -10,9 +10,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  QueryList,
-  ViewChild,
-  ViewChildren
+  ViewChild
 } from '@angular/core';
 import {PopperComponent} from '../popper/popper.component';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';

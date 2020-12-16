@@ -1,5 +1,9 @@
 <div class="overlay">
-  <div class="dialog">
+  <div class="dialog"
+       [class.xs]="size === 'xs'"
+       [class.sm]="size === 'sm'"
+       [class.md]="size === 'md'"
+       [class.lg]="size === 'lg'">
     <ng-container #ref></ng-container>
   </div>
 </div>
