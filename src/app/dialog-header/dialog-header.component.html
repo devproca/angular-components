@@ -1,1 +1,9 @@
-<ng-content></ng-content>
+<div class="dialog-header">
+  <div>
+    <ng-content></ng-content>
+  </div>
+  <div class="dismiss" (click)="onClose()">
+    <tw-svg-times></tw-svg-times>
+  </div>
+</div>
+

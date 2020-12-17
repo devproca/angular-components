@@ -12,18 +12,33 @@ import {Event, NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {DialogRef} from './dialog.ref';
 import {DialogConfig} from './dialog-config.model';
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
+const ANIMATION_DURATION = 200;
 
 @Component({
   selector: 'tw-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  styleUrls: ['./dialog.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({
+      })),
+      state('out', style({
+        opacity: 0
+      })),
+      transition('in => out', animate('200ms ease-in-out')),
+      transition('out => in', animate('200ms ease-in-out'))
+    ]),
+  ]
 })
 export class DialogComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('ref', {read: ViewContainerRef}) viewContainerRef: ViewContainerRef;
 
   size: string;
+
+  state: 'in' | 'out' = 'out';
 
   subscriptions: Subscription[] = [];
 
@@ -41,6 +56,7 @@ export class DialogComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.loadDynamicComponent();
+    this.state = 'in';
     this.changeDetectorRef.detectChanges();
   }
 
@@ -49,7 +65,10 @@ export class DialogComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   close(result?: any): void {
-    this.dialogRef.close(result);
+    this.state = 'out';
+    setTimeout(() => {
+      this.dialogRef.close(result);
+    }, ANIMATION_DURATION);
   }
 
   private initializeSize(): void {

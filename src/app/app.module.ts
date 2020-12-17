@@ -25,6 +25,8 @@ import {DialogHeaderComponent} from './dialog-header/dialog-header.component';
 import {DialogBodyComponent} from './dialog-body/dialog-body.component';
 import {DialogFooterComponent} from './dialog-footer/dialog-footer.component';
 import {DemoDialogComponent} from './demo-dialog/demo-dialog.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SvgTimesComponent} from "./svg/svg-times.component";
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import {DemoDialogComponent} from './demo-dialog/demo-dialog.component';
     SvgAngleLeftComponent,
     SvgAngleRightComponent,
     SvgCheckComponent,
+    SvgTimesComponent,
     SvgElipsisVerticalComponent,
     SvgCalendarComponent,
     OverflowMenuComponent,
@@ -54,6 +57,7 @@ import {DemoDialogComponent} from './demo-dialog/demo-dialog.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],

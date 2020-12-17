@@ -1,3 +1,16 @@
 :host {
-  @apply block bg-gray-200 px-6 py-3;
+  @apply block bg-gray-200 px-4 py-3;
+}
+
+.dialog-header {
+  @apply flex items-center;
+}
+
+.dismiss {
+  @apply ml-auto w-8 h-8 flex items-center justify-center rounded-full text-gray-700 cursor-pointer;
+  transition: background-color 150ms ease-in;
+}
+
+.dismiss:hover {
+  @apply bg-gray-300;
 }
