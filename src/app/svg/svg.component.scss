@@ -1,9 +1,21 @@
-:host(.small) {
-  svg {
+:host {
+  @apply inline-flex;
+}
+
+.svg-wrapper {
+  @apply inline-flex items-center justify-center;
+
+  > svg {
+    @apply h-4 w-auto text-gray-600;
+  }
+
+  &.sm > svg {
+    height: .875rem;
+  }
+
+  &.xs > svg {
     @apply h-3;
   }
 }
 
-svg {
-  @apply text-gray-600 h-4 leading-none;
-}
+

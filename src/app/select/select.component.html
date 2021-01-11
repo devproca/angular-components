@@ -7,26 +7,31 @@
        [class.tw-input-error]="error"
        [class.tw-input-focus]="focused">
     <div class="selected-item-wrapper">
-      <span class="placeholder" *ngIf="!filtering && !selectedValueLabel && placeholder">{{placeholder}}</span>
-      <span *ngIf="!filtering">{{selectedValueLabel}}</span>
+      <span class="placeholder" *ngIf="!filtering && !hasValue() && placeholder">{{placeholder}}</span>
+      <span *ngIf="!filtering && !multiselect">{{singleSelectValueLabel}}</span>
+      <span *ngIf="!filtering && multiselect">
+        <tw-chip *ngFor="let option of selectedOptions" [label]="option.label"
+          (close)="this.handleRemove(option.value)">
+        </tw-chip>
+      </span>
+
       <input #filter class="filter" [class.opacity-0]="!filtering"
              (focusin)="handleFocus()"
              (focusout)="handleUnfocus()"
              [formControl]="filterTextControl">
     </div>
-    <tw-svg-angle-down></tw-svg-angle-down>
+    <tw-svg class="angle-down" iconName="angleDown"></tw-svg>
   </div>
   <div (mouseleave)="handleMouseLeave()" #itemWrapper class="item-wrapper">
     <div (click)="handleClick(option)"
          (mouseenter)="handleMouseEnter(option)"
          *ngFor="let option of filteredOptions"
          [class.active]="option === activeItem"
-         #item
          class="item"
          twScrollToActive
          scrollToActiveClass="active"
          [scrollToActiveElement]="itemWrapper">
-      <tw-svg-check class="small" *ngIf="option === selectedItem"></tw-svg-check>
+      <tw-svg class="check" size="sm" iconName="check" *ngIf="isOptionSelected(option)"></tw-svg>
       {{option.label}}
     </div>
   </div>

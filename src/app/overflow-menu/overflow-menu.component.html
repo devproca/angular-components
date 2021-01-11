@@ -1,7 +1,7 @@
 <tw-popper [hideOnClick]="true">
   <div class="menu-wrapper"
     [class.active]="popper?.open">
-    <tw-elipsis-vertical></tw-elipsis-vertical>
+    <tw-svg iconName="elipsisVertical"></tw-svg>
   </div>
   <div class="item-wrapper">
       <div class="item" *ngFor="let option of options" (click)="option.click()">

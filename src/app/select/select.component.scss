@@ -30,14 +30,19 @@
 }
 
 .item {
-  @apply px-6 h-8 truncate flex items-center text-sm leading-none;
+  @apply pr-4 h-8 truncate flex items-center text-sm leading-none;
+  padding-left: 1.75rem;
 }
 
-tw-svg-angle-down {
+tw-chip {
+  @apply pr-2;
+}
+
+tw-svg.angle-down {
   @apply ml-2;
 }
 
-tw-svg-check {
+tw-svg.check {
   @apply absolute ml-2;
   left: 0;
 }

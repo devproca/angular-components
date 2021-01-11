@@ -12,7 +12,7 @@ import {Event, NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {DialogRef} from './dialog.ref';
 import {DialogConfig} from './dialog-config.model';
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 const ANIMATION_DURATION = 200;
 
@@ -22,8 +22,7 @@ const ANIMATION_DURATION = 200;
   styleUrls: ['./dialog.component.scss'],
   animations: [
     trigger('fadeInOut', [
-      state('in', style({
-      })),
+      state('in', style({})),
       state('out', style({
         opacity: 0
       })),
@@ -92,5 +91,4 @@ export class DialogComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }));
   }
-
 }

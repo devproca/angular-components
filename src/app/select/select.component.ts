@@ -17,8 +17,6 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl} from '@
 import {Subscription} from 'rxjs';
 import {ARROW_DOWN, ARROW_UP, BACKSPACE, ENTER, ESCAPE, TAB} from '../util/keycodes.util';
 
-const MAX_HEIGHT_PX = 300;
-
 @Component({
   selector: 'tw-select',
   templateUrl: './select.component.html',
@@ -35,8 +33,8 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   @Input() disabled = false;
   @Input() placeholder: string;
-  @Input() value: any;
   @Input() error = false;
+  @Input() multiselect = false;
   @Output() change = new EventEmitter<any>();
   @ViewChild(PopperComponent) private popper: PopperComponent;
   @ViewChild('filter') private filter: ElementRef;
@@ -46,6 +44,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   filterTextControl = new FormControl();
   filteredOptions: SelectItemModel[] = [];
   activeItem: SelectItemModel;
+  value: any[] = [];
 
   private _options: SelectItemModel[] = [];
   private onChange: (_: any) => void;
@@ -70,11 +69,30 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     }
   }
 
-  get selectedItem(): SelectItemModel {
+  get selectedOptions(): SelectItemModel[] {
     if (!this.options) {
-      return null;
+      return [];
     }
-    return this.options.find(o => o.value === this.value);
+    return this.value
+      .map(v => this.options.find(o => o.value === v))
+      .filter(v => !!v);
+  }
+
+  get singleSelectValueLabel(): string {
+    const selectedOption = this.hasValue() ? this.findOption(this.value[0]) : null;
+    return selectedOption ? selectedOption.label : '';
+  }
+
+  findOption(value: any): SelectItemModel {
+    return this.options.find(o => o.value === value);
+  }
+
+  isOptionSelected(option: SelectItemModel): boolean {
+    return this.selectedOptions.some(o => o === option);
+  }
+
+  hasValue(): boolean {
+    return this.value && this.value.length > 0;
   }
 
   get options(): SelectItemModel[] {
@@ -91,14 +109,6 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.refreshFilteredOptions();
   }
 
-  get selectedValueLabel(): string {
-    const selected = this.selectedValue;
-    return selected === undefined ? '' : selected.label;
-  }
-
-  get selectedValue(): any {
-    return this.options.find(o => o.value === this.value);
-  }
 
   focus(): void {
     this.focused = true;
@@ -114,7 +124,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
   }
 
   handleClick(option: SelectItemModel): void {
-    this.handleSelect(option.value);
+    this.addSelectedValue(option.value);
     this.focus();
   }
 
@@ -126,8 +136,15 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.activeItem = null;
   }
 
-  writeValue(value: string): void {
-    this.value = value;
+  writeValue(value: any): void {
+    if (!value) {
+      this.value = [];
+    } else if (Array.isArray(value)) {
+
+      this.value = [...value];
+    } else {
+      this.value = [value];
+    }
   }
 
   registerOnChange(onChange: (_: any) => void): void {
@@ -166,7 +183,11 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
         this.popper.hide();
         this.doneFiltering();
       } else if (event.key === BACKSPACE && !this.filtering) {
-        this.handleSelect(null);
+        if (this.multiselect) {
+          this.clearLastSelectedValue();
+        } else {
+          this.addSelectedValue(null);
+        }
       } else if (this.isAnyLetterOrSpacePressed(event)) {
         this.filtering = true;
         this.popper.show();
@@ -175,7 +196,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
     if (this.popper.open) {
       if (event.key === ENTER && this.activeItem) {
-        this.handleSelect(this.activeItem.value);
+        this.addSelectedValue(this.activeItem.value);
         this.popper.hide();
         event.preventDefault();
       } else if (event.key === ARROW_DOWN) {
@@ -185,6 +206,15 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
         this.activeItem = this.getNextActiveItem(-1);
         event.preventDefault();
       }
+    }
+  }
+
+  handleRemove(value: any): void {
+    const index = this.value.findIndex(v => v === value);
+    if (index !== -1) {
+      this.value.splice(index, 1);
+      this.notifyChanges();
+      this.filter.nativeElement.focus();
     }
   }
 
@@ -239,16 +269,39 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.filterTextControl.setValue('');
   }
 
-  private handleSelect(value: any): void {
-    this.doneFiltering();
-    if (this.value !== value) {
-      this.value = value;
-      this.notifyChanges(this.value);
+  private clearLastSelectedValue(): void {
+    if (this.value.length > 0) {
+      this.value.splice(this.value.length - 1, 1);
+      this.notifyChanges();
       this.filter.nativeElement.focus();
     }
   }
 
-  private notifyChanges(value: any): void {
+  private addSelectedValue(value: any): void {
+    this.doneFiltering();
+    if (!value) {
+      this.value = [];
+    } else if (!this.multiselect) {
+      if (this.value !== value) {
+        this.value = [value];
+      }
+    } else {
+      if (!this.value.some(v => v === value)) {
+        this.value.push(value);
+      }
+    }
+    this.notifyChanges();
+    this.filter.nativeElement.focus();
+  }
+
+  private notifyChanges(): void {
+    let value;
+    if (this.multiselect) {
+      value = [...this.value];
+    } else {
+      value = this.value.length === 0 ? null : this.value[0];
+    }
+
     if (this.onChange) {
       this.onChange(value);
     }
