@@ -1,4 +1,5 @@
-<div class="chip-wrapper">
+<div class="chip-wrapper"
+  [class.disabled]="disabled">
   <div class="chip-label">{{label}}</div>
-  <tw-svg-button iconName="times" (click)="onClose()"></tw-svg-button>
+  <tw-svg-button iconName="times" (click)="onClose()" *ngIf="!disabled"></tw-svg-button>
 </div>

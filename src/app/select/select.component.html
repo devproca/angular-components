@@ -10,8 +10,10 @@
       <span class="placeholder" *ngIf="!filtering && !hasValue() && placeholder">{{placeholder}}</span>
       <span *ngIf="!filtering && !multiselect">{{singleSelectValueLabel}}</span>
       <span *ngIf="!filtering && multiselect">
-        <tw-chip *ngFor="let option of selectedOptions" [label]="option.label"
-          (close)="this.handleRemove(option.value)">
+        <tw-chip *ngFor="let option of selectedOptions"
+                 [label]="option.label"
+                 [disabled]="disabled"
+                 (close)="this.handleRemove(option.value)">
         </tw-chip>
       </span>
 

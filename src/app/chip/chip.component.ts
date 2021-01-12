@@ -8,6 +8,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class ChipComponent {
 
   @Input() label: string;
+  @Input() disabled = false;
 
   @Output() close = new EventEmitter<void>();
 

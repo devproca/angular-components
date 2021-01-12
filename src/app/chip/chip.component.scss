@@ -1,7 +1,15 @@
 .chip-wrapper {
-  @apply inline-flex rounded-full items-center bg-gray-200;
+  @apply inline-flex rounded-full h-6 items-center bg-gray-200;
 }
 
 .chip-label {
   @apply text-gray-700 text-sm pl-3 pr-1;
+}
+
+.chip-wrapper.disabled {
+  @apply bg-gray-300;
+
+  > .chip-label {
+    @apply px-3;
+  }
 }

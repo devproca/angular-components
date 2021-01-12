@@ -40,7 +40,6 @@ export class PopperComponent implements OnInit, OnDestroy, AfterContentInit {
     this.reference = this.el.nativeElement.firstElementChild as HTMLElement;
     this.content = this.el.nativeElement.lastElementChild as HTMLElement;
     this.setContentStyleDisplay('none');
-    this.setContentZIndex();
   }
 
   hide(): void {
@@ -128,10 +127,6 @@ export class PopperComponent implements OnInit, OnDestroy, AfterContentInit {
       this.css(this.content, {minWidth: `${width}px`});
       this.popperInstance?.scheduleUpdate();
     }
-  }
-
-  private setContentZIndex(): void {
-    this.css(this.content, {'z-index': 9999});
   }
 
   private setContentStyleDisplay(value: string): void {

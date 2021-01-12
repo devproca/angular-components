@@ -6,7 +6,7 @@ import {FormControl} from '@angular/forms';
   templateUrl: './demo-multiselect.component.html',
   styleUrls: ['./demo-multiselect.component.scss']
 })
-export class DemoMultiselectComponent implements OnInit {
+export class DemoMultiselectComponent {
 
   formControl = new FormControl(['TWO']);
 
