@@ -25,6 +25,8 @@ import {SvgButtonComponent} from './svg-button/svg-button.component';
 import {ChipComponent} from './chip/chip.component';
 import {DemoChipComponent} from './demo-chip/demo-chip.component';
 import { DemoMultiselectComponent } from './demo-multiselect/demo-multiselect.component';
+import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { DemoRadioButtonComponent } from './demo-radio-button/demo-radio-button.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { DemoMultiselectComponent } from './demo-multiselect/demo-multiselect.co
     DialogFooterComponent,
     DemoDialogComponent,
     DemoChipComponent,
-    DemoMultiselectComponent
+    DemoMultiselectComponent,
+    RadioButtonComponent,
+    DemoRadioButtonComponent
   ],
   imports: [
     BrowserModule,

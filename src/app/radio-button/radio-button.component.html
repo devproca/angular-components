@@ -1,0 +1,14 @@
+<div class="mx-auto max-w-sm text-center flex flex-wrap justify-center">
+  <div class="flex items-center mr-4 mb-4">
+    <input type="radio" class="hidden"
+           id="{{ id }}"
+           name="{{ groupName }}"
+           value="{{ value }}"
+           checked="{{ isChecked }}"/>
+
+    <label for="{{ id }}" class="flex items-center cursor-pointer">
+      <span class="w-4 h-4 inline-block mr-1 rounded-full border border-gray-500"></span>
+      {{ label }}
+    </label>
+  </div>
+</div>
