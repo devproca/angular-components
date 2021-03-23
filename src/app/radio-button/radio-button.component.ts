@@ -13,7 +13,7 @@ import { RadioService } from '../radio-group/radio.service';
 export class RadioButtonComponent implements OnInit, OnDestroy {
   @Input() label: string;
   @Input() value: string;
-  @Input() disabled = false; // TODO: Acquire disabled state from radio-group, which has form control, not here.
+  @Input() disabled = false;
   @Output() checked = new EventEmitter<void>();
 
   isChecked = false;
