@@ -7,7 +7,7 @@
       <tw-radio-button label="Two" value="TWO" class="block"></tw-radio-button>
       <tw-radio-button label="Three" value="THREE" class="block"></tw-radio-button>
     </tw-radio-group>
-    <div class="text-red-500 text-xs leading-none mt-2" *ngIf="errors">{{errors}}</div>
+    <div class="text-red-500 text-xs leading-none mt-2" *ngIf="errors">{{ errors }}</div>
 
     <div class="my-4">
       <button class="mr-2 btn btn-blue" *ngIf="this.formControl.disabled" (click)="enable()">Enable</button>

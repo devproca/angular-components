@@ -16,6 +16,9 @@ export class RadioService {
   private _checkDisable$ = new BehaviorSubject<boolean>(null);
   checkDisable$ = this._checkDisable$.asObservable();
 
+  private _checkError$ = new BehaviorSubject<boolean>(null);
+  checkError$ = this._checkError$.asObservable();
+
   add(component: RadioButtonComponent): void {
     this.components.push(component);
   }
@@ -34,5 +37,9 @@ export class RadioService {
 
   markAsDisabled(disabledState: boolean): void {
     this._checkDisable$.next(disabledState);
+  }
+
+  markAsErrored(errorState: boolean): void {
+    this._checkError$.next(errorState);
   }
 }

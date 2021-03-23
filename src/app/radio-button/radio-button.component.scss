@@ -21,3 +21,14 @@ input[type="radio"]:disabled + label .radio-button {
   @apply bg-gray-500 border-gray-500;
   box-shadow: 0px 0px 0px 0px white inset;
 }
+
+.tw-radio-error {
+  input[type="radio"]:checked + label .radio-button {
+    @apply bg-red-500 border-red-500;
+    box-shadow: 0px 0px 0px 3px white inset;
+  }
+
+  input[type="radio"] + label .radio-button {
+    @apply border-red-500;
+  }
+}

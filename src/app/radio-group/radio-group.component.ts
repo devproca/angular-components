@@ -1,5 +1,5 @@
-import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, DoCheck, forwardRef, Injector, OnDestroy, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
@@ -19,17 +19,24 @@ import { RadioService } from './radio.service';
     }
   ]
 })
-export class RadioGroupComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class RadioGroupComponent implements OnInit, DoCheck, OnDestroy, ControlValueAccessor {
 
   private subscriptions: Subscription[] = [];
 
   private onChangeCallback: (_: string) => void;
   private onTouchedCallback: () => void;
 
-  constructor(private radioService: RadioService) { }
+  constructor(private radioService: RadioService, private injector: Injector) { }
 
   ngOnInit(): void {
     this.registerCheckedChanges();
+  }
+
+  ngDoCheck(): void {
+    const ngControl = this.ngControl;
+    if (ngControl) {
+      this.radioService.markAsErrored(!!ngControl.errors);
+    }
   }
 
   ngOnDestroy(): void {
@@ -61,5 +68,9 @@ export class RadioGroupComponent implements OnInit, OnDestroy, ControlValueAcces
         this.onTouchedCallback();
       }
     }));
+  }
+
+  private get ngControl(): NgControl {
+    return this.injector.get(NgControl, null);
   }
 }

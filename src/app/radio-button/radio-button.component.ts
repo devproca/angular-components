@@ -17,6 +17,7 @@ export class RadioButtonComponent implements OnInit, OnDestroy {
   @Output() checked = new EventEmitter<void>();
 
   isChecked = false;
+  error = false;
 
   private subscriptions: Subscription[] = [];
 
@@ -26,6 +27,7 @@ export class RadioButtonComponent implements OnInit, OnDestroy {
     this.radioService.add(this);
     this.registerCheckedChanges();
     this.registerDisableChanges();
+    this.registerErrorChanges();
   }
 
   ngOnDestroy(): void {
@@ -55,6 +57,17 @@ export class RadioButtonComponent implements OnInit, OnDestroy {
           this.disabled = true;
         } else {
           this.disabled = false;
+        }
+      }));
+  }
+
+  private registerErrorChanges(): void {
+    this.subscriptions.push(
+      this.radioService.checkError$.subscribe(errorState => {
+        if (errorState === true) {
+          this.error = true;
+        } else {
+          this.error = false;
         }
       }));
   }
