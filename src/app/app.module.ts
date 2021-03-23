@@ -25,6 +25,8 @@ import {SvgButtonComponent} from './svg-button/svg-button.component';
 import {ChipComponent} from './chip/chip.component';
 import {DemoChipComponent} from './demo-chip/demo-chip.component';
 import { DemoMultiselectComponent } from './demo-multiselect/demo-multiselect.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import { DemoCheckboxComponent } from './demo-checkbox/demo-checkbox.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { DemoMultiselectComponent } from './demo-multiselect/demo-multiselect.co
     DialogFooterComponent,
     DemoDialogComponent,
     DemoChipComponent,
-    DemoMultiselectComponent
+    DemoMultiselectComponent,
+    CheckboxComponent,
+    DemoCheckboxComponent
   ],
   imports: [
     BrowserModule,

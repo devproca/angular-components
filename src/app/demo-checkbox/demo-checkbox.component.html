@@ -1,0 +1,21 @@
+<div class="m-10">
+  <div class="text-lg mb-4">Checkboxes</div>
+  <div class="border rounded p-6">
+
+    <section>
+      <tw-checkbox label="One" value="ONE" class="block"></tw-checkbox>
+      <tw-checkbox label="Two" value="TWO" class="block"></tw-checkbox>
+    </section>
+    <div class="text-red-500 text-xs leading-none mt-2" *ngIf="errors">{{ errors }}</div>
+
+    <div class="my-4">
+      <button class="mr-2 btn btn-blue" *ngIf="this.formControl.disabled" (click)="enable()">Enable</button>
+      <button class="mr-2 btn btn-blue" *ngIf="!this.formControl.disabled" (click)="disable()">Disable</button>
+      <button class="mr-2 btn btn-red" (click)="error()">Error</button>
+    </div>
+
+    <div class="mt-6 bg-gray-200 text-gray-700 text-sm py-2 px-4 rounded">
+      Value: {{ formControl.value }}
+    </div>
+  </div>
+</div>
