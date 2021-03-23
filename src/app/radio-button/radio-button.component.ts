@@ -1,6 +1,9 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {RadioService} from '../radio-group/radio.service';
-import {Subscription} from 'rxjs';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+
+import { Subscription } from 'rxjs';
+
+import { RadioService } from '../radio-group/radio.service';
+
 
 @Component({
   selector: 'tw-radio-button',
@@ -10,18 +13,19 @@ import {Subscription} from 'rxjs';
 export class RadioButtonComponent implements OnInit, OnDestroy {
   @Input() label: string;
   @Input() value: string;
-  @Input() disabled = false;
+  @Input() disabled = false; // TODO: Acquire disabled state from radio-group, which has form control, not here.
   @Output() checked = new EventEmitter<void>();
 
-  private isChecked = false;
+  isChecked = false;
+
   private subscriptions: Subscription[] = [];
 
-  constructor(private radioService: RadioService) {
-  }
+  constructor(private radioService: RadioService) { }
 
   ngOnInit(): void {
     this.radioService.add(this);
     this.registerCheckedChanges();
+    this.registerDisableChanges();
   }
 
   ngOnDestroy(): void {
@@ -40,6 +44,17 @@ export class RadioButtonComponent implements OnInit, OnDestroy {
           this.isChecked = true;
         } else {
           this.isChecked = false;
+        }
+      }));
+  }
+
+  private registerDisableChanges(): void {
+    this.subscriptions.push(
+      this.radioService.checkDisable$.subscribe(disableState => {
+        if (disableState === true) {
+          this.disabled = true;
+        } else {
+          this.disabled = false;
         }
       }));
   }

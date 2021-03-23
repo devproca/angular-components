@@ -1,11 +1,11 @@
+<div [class.tw-radio-disabled]="disabled">
+  <input type="radio" class="hidden"
+         [value]="[value]"
+         [checked]="isChecked"
+         [disabled]="disabled"/>
 
-<input type="radio" class="hidden"
-       [value]="[value]"
-       [checked]="isChecked"/>
-
-<label class="inline-flex items-center cursor-pointer" (click)="onChecked()">
-  <span class="radio-button"></span>
-  {{ label }}
-</label>
-
-
+  <label class="inline-flex items-center cursor-pointer" (click)="onChecked()">
+    <span class="radio-button"></span>
+    {{ label }}
+  </label>
+</div>

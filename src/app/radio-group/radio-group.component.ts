@@ -1,7 +1,10 @@
-import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
-import {RadioService} from './radio.service';
-import {Subscription} from 'rxjs';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { Subscription } from 'rxjs';
+
+import { RadioService } from './radio.service';
+
 
 @Component({
   selector: 'tw-radio-group',
@@ -23,9 +26,7 @@ export class RadioGroupComponent implements OnInit, OnDestroy, ControlValueAcces
   private onChangeCallback: (_: string) => void;
   private onTouchedCallback: () => void;
 
-
-  constructor(private radioService: RadioService) {
-  }
+  constructor(private radioService: RadioService) { }
 
   ngOnInit(): void {
     this.registerCheckedChanges();
@@ -48,6 +49,7 @@ export class RadioGroupComponent implements OnInit, OnDestroy, ControlValueAcces
   }
 
   setDisabledState(disabled: boolean): void {
+    this.radioService.markAsDisabled(disabled);
   }
 
   private registerCheckedChanges(): void {
@@ -61,4 +63,3 @@ export class RadioGroupComponent implements OnInit, OnDestroy, ControlValueAcces
     }));
   }
 }
-

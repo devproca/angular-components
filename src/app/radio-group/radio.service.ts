@@ -1,6 +1,9 @@
-import {Injectable} from '@angular/core';
-import {RadioButtonComponent} from '../radio-button/radio-button.component';
-import {BehaviorSubject} from 'rxjs';
+import { Injectable } from '@angular/core';
+
+import { BehaviorSubject } from 'rxjs';
+
+import { RadioButtonComponent } from '../radio-button/radio-button.component';
+
 
 @Injectable()
 export class RadioService {
@@ -9,6 +12,9 @@ export class RadioService {
 
   private _checkedValue$ = new BehaviorSubject<string>(null);
   checkedValue$ = this._checkedValue$.asObservable();
+
+  private _checkDisable$ = new BehaviorSubject<boolean>(null);
+  checkDisable$ = this._checkDisable$.asObservable();
 
   add(component: RadioButtonComponent): void {
     this.components.push(component);
@@ -24,5 +30,9 @@ export class RadioService {
 
   markValueAsChecked(value: string): void {
     this._checkedValue$.next(value);
+  }
+
+  markAsDisabled(disabledState: boolean): void {
+    this._checkDisable$.next(disabledState);
   }
 }
