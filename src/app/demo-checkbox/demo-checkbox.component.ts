@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./demo-checkbox.component.scss']
 })
 export class DemoCheckboxComponent {
-  formControl = new FormControl('ONE');
+  formControl = new FormControl();
 
   enable(): void {
     this.formControl.enable();

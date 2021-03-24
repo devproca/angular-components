@@ -27,6 +27,7 @@ import {DemoChipComponent} from './demo-chip/demo-chip.component';
 import { DemoMultiselectComponent } from './demo-multiselect/demo-multiselect.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DemoCheckboxComponent } from './demo-checkbox/demo-checkbox.component';
+import { CheckboxGroupComponent } from './checkbox/checkbox-group/checkbox-group.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { DemoCheckboxComponent } from './demo-checkbox/demo-checkbox.component';
     DemoChipComponent,
     DemoMultiselectComponent,
     CheckboxComponent,
-    DemoCheckboxComponent
+    DemoCheckboxComponent,
+    CheckboxGroupComponent
   ],
   imports: [
     BrowserModule,
