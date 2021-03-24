@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, DoCheck, Injector, forwardRef } from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'tw-checkbox',
@@ -16,6 +17,10 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlValueAccessor {
+  private subscriptions: Subscription[] = [];
+  private onChangeCallback: (_: string) => void;
+  private onTouchedCallback: () => void;
+
   @Input() label: string;
   @Input() value: string[];
   @Input() disabled = false;
@@ -23,11 +28,6 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlVal
 
   isChecked = false;
   error = false;
-  formControl = new FormControl();
-
-  private subscriptions: Subscription[] = [];
-  private onChangeCallback: (_: string) => void;
-  private onTouchedCallback: () => void;
 
   constructor(private injector: Injector) { }
 
@@ -60,20 +60,14 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlVal
   }
 
   writeValue(value: any): void {
-    // if (!value) {
-    //   this.value = [];
-    // } else if (Array.isArray(value)) {
-    //   this.value = [...value];
-    // } else {
-    //   this.value = [value];
-    // }
-
     console.log('I AM ADDING ', value); // Test Line
 
     this.isChecked = true;
 
     if (!value) {
       this.value = [];
+    } else if (Array.isArray(value)) {
+      this.value = [...value];
     } else {
       this.value = [value];
     }
