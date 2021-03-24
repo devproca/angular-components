@@ -31,12 +31,6 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlVal
 
   constructor(private injector: Injector) { }
 
-  // private registerCheckedChanges(): void {
-  //   this.subscriptions.push(this.formControl.valueChanges.subscribe(v => {
-  //
-  //   }));
-  // }
-
   ngOnInit(): void { }
 
   ngDoCheck(): void {
@@ -60,8 +54,6 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlVal
   }
 
   writeValue(value: any): void {
-    console.log('I AM ADDING ', value); // Test Line
-
     this.isChecked = true;
 
     if (!value) {
@@ -73,6 +65,17 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlVal
     }
 
     this.notifyChanges();
+  }
+
+  removeValue(value: any): void {
+    const index = this.value.findIndex(v => v === value);
+
+    this.isChecked = false;
+
+    if (index !== -1) {
+      this.value.splice(index, 1);
+      this.notifyChanges();
+    }
   }
 
   private notifyChanges(): void {
@@ -91,19 +94,6 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlVal
     this.checked.emit(value);
   }
 
-  removeValue(value: any): void {
-    const index = this.value.findIndex(v => v === value);
-
-    console.log('REMOVING: ', this.value); // Test line.
-
-    this.isChecked = false;
-
-    if (index !== -1) {
-      this.value.splice(index, 1);
-      this.notifyChanges();
-    }
-  }
-
   registerOnChange(onChange: (_: string) => void): void {
     this.onChangeCallback = onChange;
   }
@@ -114,6 +104,6 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlVal
 
   setDisabledState(disabled: boolean): void {
     this.disabled = disabled;
-    console.log('Disabled Status: ', this.disabled); // TODO: REMOVE TEST LINE
+    console.log('DISABLED STATUS: ', this.disabled); // TODO: REMOVE TEST LINE
   }
 }
