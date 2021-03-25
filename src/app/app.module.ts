@@ -58,7 +58,7 @@ import { CheckboxGroupComponent } from './checkbox/checkbox-group/checkbox-group
     DemoMultiselectComponent,
     RadioButtonComponent,
     DemoRadioButtonComponent,
-    RadioGroupComponent
+    RadioGroupComponent,
     CheckboxComponent,
     DemoCheckboxComponent,
     CheckboxGroupComponent
