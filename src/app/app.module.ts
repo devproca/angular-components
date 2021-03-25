@@ -31,6 +31,8 @@ import { RadioGroupComponent } from './radio-button/radio-group/radio-group.comp
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DemoCheckboxComponent } from './demo-checkbox/demo-checkbox.component';
 import { CheckboxGroupComponent } from './checkbox/checkbox-group/checkbox-group.component';
+import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
+import { DemoSlideToggleComponent } from './demo-slide-toggle/demo-slide-toggle.component';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import { CheckboxGroupComponent } from './checkbox/checkbox-group/checkbox-group
     RadioGroupComponent,
     CheckboxComponent,
     DemoCheckboxComponent,
-    CheckboxGroupComponent
+    CheckboxGroupComponent,
+    SlideToggleComponent,
+    DemoSlideToggleComponent
   ],
   imports: [
     BrowserModule,
