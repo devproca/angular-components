@@ -1,52 +1,33 @@
-import { Component, OnInit, Input, Output, EventEmitter, DoCheck, Injector, forwardRef, OnDestroy} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy} from '@angular/core';
+
+import { Subscription } from 'rxjs';
 
 import { CheckboxService } from './checkbox.service';
-import { Subscription } from 'rxjs';
 
 
 @Component({
   selector: 'tw-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
-  // providers: [
-  //   CheckboxService,
-  //   {
-  //     provide: NG_VALUE_ACCESSOR,
-  //     useExisting: forwardRef(() => CheckboxComponent),
-  //     multi: true,
-  //   }
-  // ]
 })
-export class CheckboxComponent implements OnInit, DoCheck, OnDestroy {
+export class CheckboxComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
-  // private onChangeCallback: (_: any) => void;
-  // private onTouchedCallback: () => void;
 
   @Input() label: string;
   @Input() value: any;
   @Input() disabled = false;
   @Output() checked = new EventEmitter<void>();
 
-  // value: any[] = []; // TODO: Make persistent between components.
   isChecked = false;
   error = false;
 
-  constructor(private checkService: CheckboxService, private injector: Injector) { }
+  constructor(private checkService: CheckboxService) { }
 
   ngOnInit(): void {
     this.checkService.add(this);
-    //this.registerCheckedChanges();
+
     this.registerDisableChanges();
     this.registerErrorChanges();
-  }
-
-  ngDoCheck(): void {
-    // const ngControl = this.injector.get(NgControl, null);
-    //
-    // if (ngControl) {
-    //   this.error = !!ngControl.errors;
-    // }
   }
 
   ngOnDestroy(): void {
@@ -55,24 +36,19 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy {
 
   onChecked(): void {
     this.checkService.markChecked(this);
+
+    if (this.isChecked === false) {
+      this.isChecked = true;
+    } else {
+      this.isChecked = false;
+    }
+
     this.checked.emit();
-    // if (!this.isChecked) {
-    //   this.addCheckedValue(this.checkBoxValue);
-    // } else {
-    //   this.removeValue(this.checkBoxValue);
-    // }
   }
 
-  // // TODO: Refactor to support multi-check.
-  // private registerCheckedChanges(): void {
-  //   this.subscriptions.push(this.checkService.checkedValue$.subscribe(checkedValue => {
-  //     if (checkedValue === this.value) {
-  //       this.isChecked = true;
-  //     } else {
-  //       this.isChecked = false;
-  //     }
-  //   }));
-  // }
+  getValues(): string {
+    return this.value;
+  }
 
   private registerDisableChanges(): void {
     this.subscriptions.push(this.checkService.checkDisable$.subscribe(disableState => {
@@ -141,17 +117,5 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy {
   //   }
   //
   //   this.checked.emit(value);
-  // }
-
-  // registerOnChange(onChange: (_: string) => void): void {
-  //   this.onChangeCallback = onChange;
-  // }
-  //
-  // registerOnTouched(onTouch: () => void): void {
-  //   this.onTouchedCallback = onTouch;
-  // }
-  //
-  // setDisabledState(disabled: boolean): void {
-  //   this.disabled = disabled;
   // }
 }

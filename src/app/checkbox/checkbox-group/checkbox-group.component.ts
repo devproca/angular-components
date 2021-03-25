@@ -1,8 +1,10 @@
-import {Component, DoCheck, forwardRef, Injector, OnDestroy, OnInit} from '@angular/core';
+import { Component, DoCheck, forwardRef, Injector, OnDestroy, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+
+import { Subscription } from 'rxjs';
 
 import { CheckboxService } from '../checkbox.service';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
-import {Subscription} from 'rxjs';
+
 
 @Component({
   selector: 'tw-checkbox-group',
@@ -36,6 +38,11 @@ export class CheckboxGroupComponent implements ControlValueAccessor, OnInit, DoC
     if (ngControl) {
       this.checkService.markAsErrored(!!ngControl.errors);
     }
+
+    //// Test Functions ////
+    this.values = this.checkService.getCheckedComponents();
+    console.log('THESE ARE MY COMPONENTS', this.values); // Test Line, remove later.
+    // Does not belong here.
   }
 
   ngOnDestroy(): void {

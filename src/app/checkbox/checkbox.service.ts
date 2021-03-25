@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { CheckboxComponent } from './checkbox.component';
 import { BehaviorSubject } from 'rxjs';
+
+import { CheckboxComponent } from './checkbox.component';
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,7 @@ export class CheckboxService {
   remove(component: CheckboxComponent): void {
     this.components.splice(this.components.findIndex(c => c === component), 1);
   }
-  
+
   markChecked(component: CheckboxComponent): void {
     this._checkedValue$.next(component.value);
   }
@@ -38,14 +40,8 @@ export class CheckboxService {
     this._checkError$.next(errorState);
   }
 
-  // TODO: Potentially remove, no need to have a default checked value with checkboxes.
-  // markValueAsChecked(value: string): void {
-  //   this._checkedValue$.next(value);
-  // }
-
-  // addValue(value: any): void { }
-  //
-  // getValues(): any {
-  //   return this.components.values();
-  // }
+  // This should probably just return values instead of full components.
+  getCheckedComponents(): any[] {
+    return this.components.filter(x => x.isChecked === true);
+  }
 }
