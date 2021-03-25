@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {BehaviorSubject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
-import {CheckboxComponent} from './checkbox.component';
+import { CheckboxComponent } from './checkbox.component';
 
 
 @Injectable()

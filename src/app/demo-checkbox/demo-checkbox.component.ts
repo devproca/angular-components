@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,41 +6,40 @@ import { FormControl } from '@angular/forms';
   templateUrl: './demo-checkbox.component.html',
   styleUrls: ['./demo-checkbox.component.scss']
 })
-export class DemoCheckboxComponent implements OnInit {
-  formControl = new FormControl(["ONE", "FOUR"]);
+export class DemoCheckboxComponent {
 
-  options = [
-    {
-      label: "One",
-      value: "ONE"
-    },
-    {
-      label: "Two",
-      value: "TWO"
-    },
-    {
-      label: "Three",
-      value: "THREE"
-    }
-  ];
+  formControlGroup = new FormControl();
+  formControlSingle = new FormControl();
 
-  ngOnInit(): void {
-
+  enableGroup(): void {
+    this.formControlGroup.enable();
   }
 
-  enable(): void {
-    this.formControl.enable();
+  enableSingle(): void {
+    this.formControlSingle.enable();
   }
 
-  disable(): void {
-    this.formControl.disable();
+  disableGroup(): void {
+    this.formControlGroup.disable();
   }
 
-  error(): void {
-    this.formControl.setErrors({somekey: 'this is an error'});
+  disableSingle(): void {
+    this.formControlSingle.disable();
   }
 
-  get errors(): string[] {
-    return this.formControl.errors ? Object.values(this.formControl.errors) : null;
+  errorGroup(): void {
+    this.formControlGroup.setErrors({somekey: 'this is an error'});
+  }
+
+  errorSingle(): void {
+    this.formControlSingle.setErrors({somekey: 'You must accept the terms of use to continue.'});
+  }
+
+  get errorsGroup(): string[] {
+    return this.formControlGroup.errors ? Object.values(this.formControlGroup.errors) : null;
+  }
+
+  get errorsSingle(): string[] {
+    return this.formControlSingle.errors ? Object.values(this.formControlSingle.errors) : null;
   }
 }

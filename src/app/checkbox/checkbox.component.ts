@@ -1,9 +1,9 @@
-import {Component, Input, Output, EventEmitter, OnInit, OnDestroy, OnChanges, Optional, forwardRef} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, DoCheck, Optional, forwardRef, Injector } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
-import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import {CheckboxService} from './checkbox.service';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { CheckboxService } from './checkbox.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     multi: true,
   }]
 })
-export class CheckboxComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlValueAccessor {
   private subscriptions: Subscription[] = [];
 
   @Input() label: string;
@@ -31,7 +31,8 @@ export class CheckboxComponent implements OnInit, OnDestroy, ControlValueAccesso
   isChecked = false;
   error = false;
 
-  constructor(@Optional() private checkService: CheckboxService) {
+  constructor(@Optional() private checkService: CheckboxService,
+              @Optional() private injector: Injector) {
   }
 
   ngOnInit(): void {
@@ -40,6 +41,13 @@ export class CheckboxComponent implements OnInit, OnDestroy, ControlValueAccesso
       this.registerCheckChanges();
       this.registerDisableChanges();
       this.registerErrorChanges();
+    }
+  }
+
+  ngDoCheck(): void {
+    const ngControl = this.injector.get(NgControl, null);
+    if (ngControl) {
+      this.error = !!ngControl.errors;
     }
   }
 
@@ -52,6 +60,22 @@ export class CheckboxComponent implements OnInit, OnDestroy, ControlValueAccesso
   onClick(): void {
     this.isChecked = !this.isChecked;
     this.notifyChanges();
+  }
+
+  writeValue(value: string): void {
+    this.isChecked = value === this.value;
+  }
+
+  registerOnChange(onChange: (_: string) => void): void {
+    this.onChange = onChange;
+  }
+
+  registerOnTouched(onTouch: () => void): void {
+    this.onTouched = onTouch;
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
   }
 
   private registerCheckChanges(): void {
@@ -81,22 +105,6 @@ export class CheckboxComponent implements OnInit, OnDestroy, ControlValueAccesso
         this.error = false;
       }
     }));
-  }
-
-  writeValue(value: string): void {
-    this.isChecked = value === this.value;
-  }
-
-  registerOnChange(onChange: (_: string) => void): void {
-    this.onChange = onChange;
-  }
-
-  registerOnTouched(onTouch: () => void): void {
-    this.onTouched = onTouch;
-  }
-
-  setDisabledState(disabled: boolean): void {
-    this.disabled = disabled;
   }
 
   private notifyChanges(): void {
