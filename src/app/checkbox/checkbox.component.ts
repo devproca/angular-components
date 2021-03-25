@@ -1,53 +1,66 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, OnDestroy, OnChanges, Optional, forwardRef} from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 
-import { CheckboxService } from './checkbox.service';
+import {CheckboxService} from './checkbox.service';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 
 @Component({
   selector: 'tw-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => CheckboxComponent),
+    multi: true,
+  }]
 })
-export class CheckboxComponent implements OnInit, OnDestroy {
+export class CheckboxComponent implements OnInit, OnDestroy, ControlValueAccessor {
   private subscriptions: Subscription[] = [];
 
   @Input() label: string;
   @Input() value: any;
   @Input() disabled = false;
   @Output() checked = new EventEmitter<void>();
+  @Output() unchecked = new EventEmitter<void>();
+
+  private onChange: (_: string) => void;
+  private onTouched: () => void;
 
   isChecked = false;
   error = false;
 
-  constructor(private checkService: CheckboxService) { }
+  constructor(@Optional() private checkService: CheckboxService) {
+  }
 
   ngOnInit(): void {
-    this.checkService.add(this);
-
-    this.registerDisableChanges();
-    this.registerErrorChanges();
+    if (this.checkService) {
+      this.checkService.add(this);
+      this.registerCheckChanges();
+      this.registerDisableChanges();
+      this.registerErrorChanges();
+    }
   }
 
   ngOnDestroy(): void {
-    this.checkService.remove(this);
-  }
-
-  onChecked(): void {
-    this.checkService.markChecked(this);
-
-    if (this.isChecked === false) {
-      this.isChecked = true;
-    } else {
-      this.isChecked = false;
+    if (this.checkService) {
+      this.checkService.remove(this);
     }
-
-    this.checked.emit();
   }
 
-  getValues(): string {
-    return this.value;
+  onClick(): void {
+    this.isChecked = !this.isChecked;
+    this.notifyChanges();
+  }
+
+  private registerCheckChanges(): void {
+    this.subscriptions.push(this.checkService.checkedValue$.subscribe(checkedValues => {
+      const isChecked = checkedValues.some(value => value === this.value);
+      if (isChecked !== this.isChecked) {
+        this.isChecked = isChecked;
+      }
+    }));
   }
 
   private registerDisableChanges(): void {
@@ -70,52 +83,36 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     }));
   }
 
-  // private addCheckedValue(value: any): void {
-  //   this.isChecked = true;
-  //
-  //   if (!value) {
-  //     this.value = [];
-  //   } else {
-  //       if (!this.value.some(v => v === value)) {
-  //         this.value.push(value);
-  //       }
-  //   }
-  //
-  //   this.notifyChanges();
-  // }
+  writeValue(value: string): void {
+    this.isChecked = value === this.value;
+  }
 
-  // writeValue(value: any): void {
-  //   if (!value) {
-  //     this.value = [];
-  //   } else if (Array.isArray(value)) {
-  //     this.value = [...value];
-  //   } else {
-  //     this.value = [value];
-  //   }
-  // }
+  registerOnChange(onChange: (_: string) => void): void {
+    this.onChange = onChange;
+  }
 
-  // removeValue(value: any): void {
-  //   const index = this.value.findIndex(v => v === value);
-  //
-  //   this.isChecked = false;
-  //
-  //   if (index !== -1) {
-  //     this.value.splice(index, 1);
-  //     this.notifyChanges();
-  //   }
-  // }
-  //
-  // private notifyChanges(): void {
-  //   let value;
-  //   value = [...this.value];
-  //
-  //   if (this.onChangeCallback) {
-  //     this.onChangeCallback(value);
-  //   }
-  //   if (this.onTouchedCallback) {
-  //     this.onTouchedCallback();
-  //   }
-  //
-  //   this.checked.emit(value);
-  // }
+  registerOnTouched(onTouch: () => void): void {
+    this.onTouched = onTouch;
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled;
+  }
+
+  private notifyChanges(): void {
+    if (this.isChecked) {
+      this.checkService?.markChecked(this);
+      this.checked.emit();
+    } else {
+      this.checkService?.markUnchecked(this);
+      this.unchecked.emit();
+    }
+
+    if (this.onChange) {
+      this.onChange(this.isChecked ? this.value : null);
+    }
+    if (this.onTouched) {
+      this.onTouched();
+    }
+  }
 }

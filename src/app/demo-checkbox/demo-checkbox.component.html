@@ -1,28 +1,45 @@
+
 <div class="m-10">
-  <div class="text-lg mb-4">Checkboxes</div>
-  <div class="border rounded p-6">
+          <tw-checkbox-group [formControl]="formControl">
+            <tw-checkbox *ngFor="let option of options"
+                         [label]="option.label"
+                         [value]="option.value"
+                         class="block">
+            </tw-checkbox>
 
-<!--    <section [formControl]="formControl" ngDefaultControl>-->
-<!--      <tw-checkbox label="One" checkBoxValue="ONE" class="block"></tw-checkbox>-->
-<!--      <tw-checkbox label="Two" checkBoxValue="TWO" class="block"></tw-checkbox>-->
-<!--      <tw-checkbox label="Three" checkBoxValue="THREE" class="block"></tw-checkbox>-->
-<!--    </section>-->
-
-        <tw-checkbox-group [formControl]="formControl">
-          <tw-checkbox label="One" value="ONE" class="block"></tw-checkbox>
-          <tw-checkbox label="Two" value="TWO" class="block"></tw-checkbox>
-          <tw-checkbox label="Three" value="THREE" class="block"></tw-checkbox>
-        </tw-checkbox-group>
-    <div class="text-red-500 text-xs leading-none mt-2" *ngIf="errors">{{ errors }}</div>
-
-    <div class="my-4">
-      <button class="mr-2 btn btn-blue" *ngIf="this.formControl.disabled" (click)="enable()">Enable</button>
-      <button class="mr-2 btn btn-blue" *ngIf="!this.formControl.disabled" (click)="disable()">Disable</button>
-      <button class="mr-2 btn btn-red" (click)="error()">Error</button>
-    </div>
-
-    <div class="mt-6 bg-gray-200 text-gray-700 text-sm py-2 px-4 rounded">
-      Value: {{ formControl.value }}
-    </div>
-  </div>
+          </tw-checkbox-group>
 </div>
+
+{{formControl.value | json}}
+
+
+<!--<div class="m-10">-->
+<!--  <div class="text-lg mb-4">Checkboxes</div>-->
+<!--  <div class="border rounded p-6">-->
+<!--        <tw-checkbox-group [formControl]="formControl">-->
+<!--          <tw-checkbox label="One" value="ONE" class="block"></tw-checkbox>-->
+<!--          <tw-checkbox label="Two" value="TWO" class="block"></tw-checkbox>-->
+<!--          <tw-checkbox label="Three" value="THREE" class="block"></tw-checkbox>-->
+<!--        </tw-checkbox-group>-->
+<!--    <div class="text-red-500 text-xs leading-none mt-2" *ngIf="errors">{{ errors }}</div>-->
+
+<!--    <div class="my-4">-->
+<!--      <button class="mr-2 btn btn-blue" *ngIf="this.formControl.disabled" (click)="enable()">Enable</button>-->
+<!--      <button class="mr-2 btn btn-blue" *ngIf="!this.formControl.disabled" (click)="disable()">Disable</button>-->
+<!--      <button class="mr-2 btn btn-red" (click)="error()">Error</button>-->
+<!--    </div>-->
+
+<!--    <div class="mt-6 bg-gray-200 text-gray-700 text-sm py-2 px-4 rounded">-->
+<!--      Value: {{ formControl.value }}-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="border rounded p-6 mt-6">-->
+
+<!--    <tw-checkbox [formControl]="formControl2" label="I accept the terms of use" value="ONE" class="block"></tw-checkbox>-->
+
+<!--    <div class="mt-6 bg-gray-200 text-gray-700 text-sm py-2 px-4 rounded">-->
+<!--      Value: {{ formControl2.value }}-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

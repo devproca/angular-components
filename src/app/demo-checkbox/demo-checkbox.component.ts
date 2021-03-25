@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,8 +6,27 @@ import { FormControl } from '@angular/forms';
   templateUrl: './demo-checkbox.component.html',
   styleUrls: ['./demo-checkbox.component.scss']
 })
-export class DemoCheckboxComponent {
-  formControl = new FormControl();
+export class DemoCheckboxComponent implements OnInit {
+  formControl = new FormControl(["ONE", "FOUR"]);
+
+  options = [
+    {
+      label: "One",
+      value: "ONE"
+    },
+    {
+      label: "Two",
+      value: "TWO"
+    },
+    {
+      label: "Three",
+      value: "THREE"
+    }
+  ];
+
+  ngOnInit(): void {
+
+  }
 
   enable(): void {
     this.formControl.enable();

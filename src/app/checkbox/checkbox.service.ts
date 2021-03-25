@@ -1,17 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
-import { CheckboxComponent } from './checkbox.component';
+import {CheckboxComponent} from './checkbox.component';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CheckboxService {
   private components: CheckboxComponent[] = [];
 
-  private _checkedValue$ = new BehaviorSubject<any>(null);
+  private _checkedValue$ = new BehaviorSubject<string[]>([]);
   checkedValue$ = this._checkedValue$.asObservable();
 
   private _checkDisable$ = new BehaviorSubject<boolean>(null);
@@ -29,7 +27,14 @@ export class CheckboxService {
   }
 
   markChecked(component: CheckboxComponent): void {
-    this._checkedValue$.next(component.value);
+    const currentCheckedValues = this._checkedValue$.getValue();
+    this._checkedValue$.next([...currentCheckedValues, component.value]);
+  }
+
+  markUnchecked(component: CheckboxComponent): void {
+    const currentCheckedValues = [...this._checkedValue$.getValue()];
+    currentCheckedValues.splice(currentCheckedValues.findIndex(v => v === component.value), 1);
+    this._checkedValue$.next(currentCheckedValues);
   }
 
   markAsDisabled(disabledState: boolean): void {
@@ -40,8 +45,11 @@ export class CheckboxService {
     this._checkError$.next(errorState);
   }
 
-  // This should probably just return values instead of full components.
-  getCheckedComponents(): any[] {
-    return this.components.filter(x => x.isChecked === true);
+  setCheckedValues(values: string[]): void {
+    if (!values) {
+      this._checkedValue$.next([]);
+    } else {
+      this._checkedValue$.next(values);
+    }
   }
 }

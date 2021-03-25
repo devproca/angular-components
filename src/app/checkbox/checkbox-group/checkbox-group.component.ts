@@ -1,9 +1,9 @@
-import { Component, DoCheck, forwardRef, Injector, OnDestroy, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import {Component, DoCheck, forwardRef, Injector, OnDestroy, OnInit, EventEmitter, Output} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
 
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 
-import { CheckboxService } from '../checkbox.service';
+import {CheckboxService} from '../checkbox.service';
 
 
 @Component({
@@ -19,48 +19,56 @@ import { CheckboxService } from '../checkbox.service';
     }
   ]
 })
-export class CheckboxGroupComponent implements ControlValueAccessor, OnInit, DoCheck, OnDestroy {
+export class CheckboxGroupComponent implements OnInit, OnDestroy, ControlValueAccessor {
   private subscriptions: Subscription[] = [];
-  private onChange: (_: string) => void;
+  private onChange: (_: string[]) => void;
   private onTouched: () => void;
 
-  values: any[] = [];
+  @Output() changes = new EventEmitter<string[]>();
 
-  constructor(private checkService: CheckboxService, private injector: Injector) { }
+  constructor(private checkService: CheckboxService,
+              private injector: Injector) {
+  }
 
   ngOnInit(): void {
     this.registerCheckedChanges();
   }
 
-  ngDoCheck(): void {
-    const ngControl = this.injector.get(NgControl, null);
-
-    if (ngControl) {
-      this.checkService.markAsErrored(!!ngControl.errors);
-    }
-
-    //// Test Functions ////
-    this.values = this.checkService.getCheckedComponents();
-    console.log('THESE ARE MY COMPONENTS', this.values); // Test Line, remove later.
-    // Does not belong here.
+  private registerCheckedChanges(): void {
+    this.subscriptions.push(this.checkService.checkedValue$.subscribe(value => {
+      this.changes.emit(value);
+      if (this.onChange) {
+        this.onChange(value);
+      }
+      if (this.onTouched) {
+        this.onTouched();
+      }
+    }));
   }
+
+
+  // ngDoCheck(): void {
+  //   const ngControl = this.injector.get(NgControl, null);
+  //
+  //   if (ngControl) {
+  //     this.checkService.markAsErrored(!!ngControl.errors);
+  //   }
+  //
+  //   //// Test Functions ////
+  //   this.values = this.checkService.getCheckedComponents();
+  //   console.log('THESE ARE MY COMPONENTS', this.values); // Test Line, remove later.
+  //   // Does not belong here.
+  // }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  writeValue(value: string): void {
-    // TODO
-    // if (!value) {
-    //   this.values = [];
-    // } else if (Array.isArray(value)) {
-    //   this.values = [...value];
-    // } else {
-    //   this.values = [value];
-    // }
+  writeValue(value: string[]): void {
+    this.checkService.setCheckedValues(value);
   }
 
-  registerOnChange(onChange: (_: string) => void): void {
+  registerOnChange(onChange: (_: string[]) => void): void {
     this.onChange = onChange;
   }
 
@@ -70,16 +78,5 @@ export class CheckboxGroupComponent implements ControlValueAccessor, OnInit, DoC
 
   setDisabledState(disabled: boolean): void {
     this.checkService.markAsDisabled(disabled);
-  }
-
-  private registerCheckedChanges(): void {
-    this.subscriptions.push(this.checkService.checkedValue$.subscribe(value => {
-      if (this.onChange) {
-        this.onChange(value);
-      }
-      if (this.onTouched) {
-        this.onTouched();
-      }
-    }));
   }
 }

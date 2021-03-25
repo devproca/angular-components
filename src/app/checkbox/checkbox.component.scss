@@ -8,18 +8,14 @@ input[type="checkbox"] {
   @apply text-blue-500 h-5 w-5;
 }
 
-.tw-checkbox-disabled { // Same as tw-input-disabled, should use that instead of redundant code.
-  @apply bg-gray-200 text-gray-600 outline-none;
-  pointer-events: none;
+//.tw-checkbox-disabled { // Same as tw-input-disabled, should use that instead of redundant code.
+//  @apply bg-gray-200 text-gray-600 outline-none;
+//  pointer-events: none;
+//}
+
+.tw-checkbox-disabled {
+  @apply tw-input-disabled pointer-events-none;
 }
-
-//.tw-checkbox-disabled {
-//  @apply tw-input-disabled extra modifiers after this;
-//}
-
-//.tw-checkbox:disabled {
-//  @apply tw-checkbox-disabled;
-//}
 
 input[type="checkbox"]:disabled {
   @apply bg-gray-500 border-gray-500;
