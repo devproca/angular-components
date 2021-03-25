@@ -1,0 +1,25 @@
+@import '../../input.scss';
+
+.checkbox {
+  @apply inline-flex items-center mt-3;
+}
+
+input[type="checkbox"] {
+  @apply text-blue-500 h-5 w-5;
+}
+
+.tw-checkbox-disabled {
+  @apply tw-input-disabled pointer-events-none;
+}
+
+input[type="checkbox"]:disabled {
+  @apply bg-gray-500 border-gray-500;
+}
+
+.tw-checkbox-error {
+  @apply text-red-500;
+
+  input[type="checkbox"] {
+    @apply text-red-500 border-red-500;
+  }
+}

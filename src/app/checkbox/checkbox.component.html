@@ -1,0 +1,13 @@
+<label class="checkbox"
+       [class.tw-checkbox-disabled]="disabled"
+       [class.tw-checkbox-error]="error">
+
+  <input type="checkbox"
+         class="form-checkbox"
+         (click)="onClick()"
+         [value]="[value]"
+         [checked]="isChecked"
+         [disabled]="disabled">
+
+  <span class="ml-2">{{ label }}</span>
+</label>

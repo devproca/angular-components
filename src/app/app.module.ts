@@ -28,6 +28,9 @@ import { DemoMultiselectComponent } from './demo-multiselect/demo-multiselect.co
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { DemoRadioButtonComponent } from './demo-radio-button/demo-radio-button.component';
 import { RadioGroupComponent } from './radio-button/radio-group/radio-group.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import { DemoCheckboxComponent } from './demo-checkbox/demo-checkbox.component';
+import { CheckboxGroupComponent } from './checkbox/checkbox-group/checkbox-group.component';
 
 
 @NgModule({
@@ -56,6 +59,9 @@ import { RadioGroupComponent } from './radio-button/radio-group/radio-group.comp
     RadioButtonComponent,
     DemoRadioButtonComponent,
     RadioGroupComponent
+    CheckboxComponent,
+    DemoCheckboxComponent,
+    CheckboxGroupComponent
   ],
   imports: [
     BrowserModule,
