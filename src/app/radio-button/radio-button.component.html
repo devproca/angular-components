@@ -1,9 +1,10 @@
 <div [class.tw-radio-disabled]="disabled"
      [class.tw-radio-error]="error">
+
   <input type="radio" class="hidden"
          [value]="[value]"
          [checked]="isChecked"
-         [disabled]="disabled"/>
+         [disabled]="disabled">
 
   <label class="inline-flex items-center cursor-pointer" (click)="onChecked()">
     <span class="radio-button"></span>

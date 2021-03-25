@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+
 @Component({
   selector: 'tw-demo-radio-button',
   templateUrl: './demo-radio-button.component.html',
@@ -18,7 +19,7 @@ export class DemoRadioButtonComponent {
   }
 
   error(): void {
-    this.formControl.setErrors({somekey: 'this is an error'});
+    this.formControl.setErrors({somekey: 'This is an error.'});
   }
 
   get errors(): string[] {

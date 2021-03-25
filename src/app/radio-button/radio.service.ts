@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { RadioButtonComponent } from '../radio-button/radio-button.component';
+import { RadioButtonComponent } from './radio-button.component';
 
 
 @Injectable()

@@ -1,3 +1,5 @@
+@import '../../input.scss';
+
 .radio-button {
   @apply w-5 h-5 inline-block mr-1 rounded-full border-2 border-gray-500;
   transition: all ease-in-out 200ms;
@@ -9,12 +11,7 @@ input[type="radio"]:checked + label .radio-button {
 }
 
 .tw-radio-disabled {
-  @apply bg-gray-200 text-gray-600 border-gray-200 outline-none;
-  pointer-events: none;
-}
-
-.tw-radio:disabled {
-  @apply tw-radio-disabled;
+  @apply tw-input-disabled border-gray-200 pointer-events-none;
 }
 
 input[type="radio"]:disabled + label .radio-button {

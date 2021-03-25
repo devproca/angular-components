@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 
 import { Subscription } from 'rxjs';
 
-import { RadioService } from '../radio-group/radio.service';
+import { RadioService } from './radio.service';
 
 
 @Component({
@@ -11,6 +11,8 @@ import { RadioService } from '../radio-group/radio.service';
   styleUrls: ['./radio-button.component.scss']
 })
 export class RadioButtonComponent implements OnInit, OnDestroy {
+  private subscriptions: Subscription[] = [];
+
   @Input() label: string;
   @Input() value: string;
   @Input() disabled = false;
@@ -18,8 +20,6 @@ export class RadioButtonComponent implements OnInit, OnDestroy {
 
   isChecked = false;
   error = false;
-
-  private subscriptions: Subscription[] = [];
 
   constructor(private radioService: RadioService) { }
 
@@ -42,33 +42,21 @@ export class RadioButtonComponent implements OnInit, OnDestroy {
   private registerCheckedChanges(): void {
     this.subscriptions.push(
       this.radioService.checkedValue$.subscribe(checkedValue => {
-        if (checkedValue === this.value) {
-          this.isChecked = true;
-        } else {
-          this.isChecked = false;
-        }
+        this.isChecked = checkedValue === this.value;
       }));
   }
 
   private registerDisableChanges(): void {
     this.subscriptions.push(
       this.radioService.checkDisable$.subscribe(disableState => {
-        if (disableState === true) {
-          this.disabled = true;
-        } else {
-          this.disabled = false;
-        }
+        this.disabled = disableState === true;
       }));
   }
 
   private registerErrorChanges(): void {
     this.subscriptions.push(
       this.radioService.checkError$.subscribe(errorState => {
-        if (errorState === true) {
-          this.error = true;
-        } else {
-          this.error = false;
-        }
+        this.error = errorState === true;
       }));
   }
 }

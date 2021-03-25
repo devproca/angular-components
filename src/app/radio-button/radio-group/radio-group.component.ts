@@ -3,7 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/for
 
 import { Subscription } from 'rxjs';
 
-import { RadioService } from './radio.service';
+import { RadioService } from '../radio.service';
 
 
 @Component({
@@ -20,9 +20,7 @@ import { RadioService } from './radio.service';
   ]
 })
 export class RadioGroupComponent implements OnInit, DoCheck, OnDestroy, ControlValueAccessor {
-
   private subscriptions: Subscription[] = [];
-
   private onChangeCallback: (_: string) => void;
   private onTouchedCallback: () => void;
 
