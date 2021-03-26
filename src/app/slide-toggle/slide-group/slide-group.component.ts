@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, DoCheck, OnDestroy, EventEmitter, Injector, forwardRef } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, DoCheck, OnDestroy, forwardRef, Injector } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -27,7 +27,8 @@ export class SlideGroupComponent implements OnInit, DoCheck, OnDestroy, ControlV
   @Output() changes = new EventEmitter<string[]>();
 
   constructor(private toggleService: SlideToggleService,
-              private injector: Injector) { }
+              private injector: Injector) {
+  }
 
   ngOnInit(): void {
     this.registerToggledChanges();

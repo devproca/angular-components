@@ -1,8 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit, DoCheck, OnDestroy, Optional, forwardRef, Injector } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
-import {SlideToggleService} from './slide-toggle.service';
+import { Subscription} from 'rxjs';
+
+import { SlideToggleService} from './slide-toggle.service';
+
 
 @Component({
   selector: 'tw-slide-toggle',
