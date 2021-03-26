@@ -33,24 +33,6 @@ input:checked ~ .toggle-button {
   @apply ml-2;
 }
 
-.tw-slide-toggle-disabled {
-  @apply tw-input-disabled pointer-events-none;
-
-  input:checked ~ .toggle-path {
-    @apply bg-gray-500;
-  }
-}
-
-.tw-slide-toggle-error {
-  .toggle-path {
-    @apply bg-red-200;
-  }
-
-  input:checked ~ .toggle-path {
-    @apply bg-red-500;
-  }
-}
-
 //// ALTERNATE STYLING CLASS ////
 // Provides an entirely different visual style of slide toggle if the alternateStyling flag is set to true.
 .tw-slide-toggle-alt-styling {
@@ -84,5 +66,39 @@ input:checked ~ .toggle-button {
 
   .toggle-label {
     @apply ml-4;
+  }
+}
+
+.tw-slide-toggle-disabled {
+  @apply text-gray-600 pointer-events-none;
+
+  .toggle-button {
+    @apply bg-gray-500;
+  }
+
+  input:checked ~ .toggle-path {
+    @apply bg-gray-300;
+  }
+
+  input:checked ~ .toggle-button {
+    @apply bg-gray-500;
+  }
+}
+
+.tw-slide-toggle-error {
+  .toggle-path {
+    @apply bg-red-200;
+  }
+
+  .toggle-button {
+    @apply bg-red-500
+  }
+
+  input:checked ~ .toggle-path {
+    @apply bg-red-200;
+  }
+
+  input:checked ~ .toggle-button {
+    @apply bg-red-500;
   }
 }
