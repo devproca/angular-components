@@ -1,11 +1,17 @@
-<label class="slide-toggle">
+<label class="slide-toggle"
+       (click)="onClick()"
+       [class.tw-slide-toggle-disabled]="disabled">
+
   <div class="relative">
-    <input type="checkbox" class="hidden"/>
+    <input type="checkbox"
+           class="hidden"
+           [value]="[value]"
+           [checked]="isChecked"
+           [disabled]="disabled">
 
     <div class="toggle-path"></div> <!-- Path for slider. -->
-
-    <div class="toggle-button"></div> <!-- Circle -->
+    <div class="toggle-button"></div> <!-- Circle button. -->
   </div>
 
-  <span class="ml-2">TEST</span>
+  <span class="ml-2">{{ label }}</span>
 </label>
