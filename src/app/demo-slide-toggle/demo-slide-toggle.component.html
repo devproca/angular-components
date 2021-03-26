@@ -26,9 +26,12 @@
 
       <div class="m-2"></div>
 
-      <div class="flex-1">
-        <div class="text-sm mb-4">Single Slide Toggle</div>
-        <tw-slide-toggle [formControl]="formControlSingle" label="One" value="ONE"></tw-slide-toggle>
+      <div class="flex-1 ">
+        <div class="text-sm mb-4">Single Slide Toggle (w/ Alternate Styling Enabled)</div>
+        <tw-slide-toggle [formControl]="formControlSingle"
+                         label="One"
+                         value="ONE"
+                         alternateStyling="true"></tw-slide-toggle>
         <div class="text-red-500 text-xs leading-none mt-2" *ngIf="errorsSingle">{{ errorsSingle }}</div>
 
         <div class="mt-6 bg-gray-200 text-gray-700 text-sm py-2 px-4 rounded">

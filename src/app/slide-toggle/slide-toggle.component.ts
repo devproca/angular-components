@@ -24,6 +24,7 @@ export class SlideToggleComponent implements OnInit, DoCheck, OnDestroy, Control
   @Input() label: string;
   @Input() value: any;
   @Input() disabled = false;
+  @Input() alternateStyling = false;
   @Output() toggled = new EventEmitter<void>();
   @Output() untoggled = new EventEmitter<void>();
 
