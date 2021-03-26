@@ -1,13 +1,14 @@
 <label class="slide-toggle"
        (click)="onClick()"
-       [class.tw-slide-toggle-disabled]="disabled">
+       [class.tw-slide-toggle-disabled]="disabled"
+       [class.tw-slide-toggle-error]="error">
 
   <div class="relative">
     <input type="checkbox"
-           class="hidden"
+           class="hidden left-20"
            [value]="[value]"
            [checked]="isChecked"
-           [disabled]="disabled">
+           [disabled]="true"> <!-- Needs to be true for smooth function of button, for unknown reason. -->
 
     <div class="toggle-path"></div> <!-- Path for slider. -->
     <div class="toggle-button"></div> <!-- Circle button. -->
