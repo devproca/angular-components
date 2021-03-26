@@ -1,0 +1,51 @@
+<div class="m-10">
+  <div class="text-lg mb-4">Slide Toggles</div>
+  <div class="border rounded p-6">
+    <div class="flex">
+      <div class="flex-1">
+        <div class="text-sm mb-4">Slide Toggle Group</div>
+        <tw-slide-group [formControl]="formControlGroup">
+          <tw-slide-toggle label="One" value="ONE" class="block"></tw-slide-toggle>
+          <tw-slide-toggle label="Two" value="TWO" class="block"></tw-slide-toggle>
+          <tw-slide-toggle label="Three" value="THREE" class="block"></tw-slide-toggle>
+        </tw-slide-group>
+        <div class="text-red-500 text-xs leading-none mt-2" *ngIf="errorsGroup">{{ errorsGroup }}</div>
+
+        <div class="mt-6 bg-gray-200 text-gray-700 text-sm py-2 px-4 rounded">
+          Value: {{ formControlGroup.value }}
+        </div>
+
+        <div class="my-4">
+          <button class="mr-2 btn btn-blue" *ngIf="this.formControlGroup.disabled" (click)="enableGroup()">Enable
+          </button>
+          <button class="mr-2 btn btn-blue" *ngIf="!this.formControlGroup.disabled" (click)="disableGroup()">Disable
+          </button>
+          <button class="mr-2 btn btn-red" (click)="errorGroup()">Error</button>
+        </div>
+      </div>
+
+      <div class="m-2"></div>
+
+      <div class="flex-1 ">
+        <div class="text-sm mb-4">Single Slide Toggle (w/ Alternate Styling Enabled)</div>
+        <tw-slide-toggle [formControl]="formControlSingle"
+                         label="Toggle"
+                         value="ON"
+                         alternateStyling="true"></tw-slide-toggle>
+        <div class="text-red-500 text-xs leading-none mt-2" *ngIf="errorsSingle">{{ errorsSingle }}</div>
+
+        <div class="mt-6 bg-gray-200 text-gray-700 text-sm py-2 px-4 rounded">
+          Value: {{ formControlSingle.value }}
+        </div>
+
+        <div class="my-4">
+          <button class="mr-2 btn btn-blue" *ngIf="this.formControlSingle.disabled" (click)="enableSingle()">Enable
+          </button>
+          <button class="mr-2 btn btn-blue" *ngIf="!this.formControlSingle.disabled" (click)="disableSingle()">Disable
+          </button>
+          <button class="mr-2 btn btn-red" (click)="errorSingle()">Error</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

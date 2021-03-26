@@ -18,15 +18,14 @@ import { CheckboxService } from './checkbox.service';
 })
 export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlValueAccessor {
   private subscriptions: Subscription[] = [];
+  private onChange: (_: string) => void;
+  private onTouched: () => void;
 
   @Input() label: string;
   @Input() value: any;
   @Input() disabled = false;
   @Output() checked = new EventEmitter<void>();
   @Output() unchecked = new EventEmitter<void>();
-
-  private onChange: (_: string) => void;
-  private onTouched: () => void;
 
   isChecked = false;
   error = false;
@@ -55,6 +54,7 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlVal
     if (this.checkService) {
       this.checkService.remove(this);
     }
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   onClick(): void {
@@ -89,21 +89,13 @@ export class CheckboxComponent implements OnInit, DoCheck, OnDestroy, ControlVal
 
   private registerDisableChanges(): void {
     this.subscriptions.push(this.checkService.checkDisable$.subscribe(disableState => {
-      if (disableState === true) {
-        this.disabled = true;
-      } else {
-        this.disabled = false;
-      }
+      this.disabled = disableState === true;
     }));
   }
 
   private registerErrorChanges(): void {
     this.subscriptions.push(this.checkService.checkError$.subscribe(errorState => {
-      if (errorState === true) {
-        this.error = true;
-      } else {
-        this.error = false;
-      }
+      this.error = errorState === true;
     }));
   }
 

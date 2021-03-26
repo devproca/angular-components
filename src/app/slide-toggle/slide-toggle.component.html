@@ -1,0 +1,19 @@
+<label class="slide-toggle"
+       (click)="onClick()"
+       [class.tw-slide-toggle-disabled]="disabled"
+       [class.tw-slide-toggle-error]="error"
+       [class.tw-slide-toggle-alt-styling]="alternateStyling">
+
+  <div class="styling">
+    <input type="checkbox"
+           class="hidden"
+           [value]="[value]"
+           [checked]="isChecked"
+           [disabled]="true">
+
+    <div class="toggle-path"></div>
+    <div class="toggle-button"></div>
+  </div>
+
+  <span class="toggle-label">{{ label }}</span>
+</label>

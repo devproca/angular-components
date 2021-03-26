@@ -1,0 +1,104 @@
+.slide-toggle {
+  @apply inline-flex items-center cursor-pointer;
+}
+
+.styling {
+  @apply relative;
+}
+
+.toggle-path {
+  @apply bg-gray-200 w-8 h-5 rounded-full shadow-inner
+  transition duration-300 ease-in-out;
+}
+
+input:checked ~ .toggle-path {
+  @apply bg-blue-500;
+}
+
+.toggle-button {
+  @apply absolute w-3 h-3 bg-white rounded-full shadow inset-y-0 left-0
+  transition duration-300 ease-in-out;
+
+  top: 0.25rem;
+  left: 0.25rem;
+}
+
+input:checked ~ .toggle-button {
+  transform: translateX(100%);
+}
+
+.toggle-label {
+  @apply ml-2;
+}
+
+//// ALTERNATE STYLING CLASS ////
+// Provides an entirely different visual style of slide toggle if the alternateStyling flag is set to true.
+.tw-slide-toggle-alt-styling {
+  .slide-toggle {
+    @apply flex-auto flex flex-col items-center h-64 mr-8;
+  }
+
+  .styling {
+    @apply w-8 py-1 my-1 relative cursor-pointer;
+  }
+
+  .toggle-path {
+    @apply h-5 bg-gray-300 rounded-full;
+  }
+
+  input:checked ~ .toggle-path {
+    @apply bg-blue-300;
+  }
+
+  .toggle-button {
+    @apply absolute flex items-center justify-center
+    rounded-full bg-white border-gray-300
+    -ml-3 mt-px w-6 h-6 top-0
+    transition duration-300 ease-in-out;
+  }
+
+  input:checked ~ .toggle-button {
+    @apply bg-blue-500;
+    transform: translateX(100%);
+  }
+
+  .toggle-label {
+    @apply ml-4;
+  }
+}
+
+//// DISABLE ////
+.tw-slide-toggle-disabled {
+  @apply text-gray-600 pointer-events-none;
+
+  .toggle-button {
+    @apply bg-gray-500;
+  }
+
+  input:checked ~ .toggle-path {
+    @apply bg-gray-300;
+  }
+
+  input:checked ~ .toggle-button {
+    @apply bg-gray-500;
+  }
+}
+
+//// ERROR ////
+.tw-slide-toggle-error {
+  .toggle-path {
+    @apply bg-red-200;
+  }
+
+  .toggle-button {
+    @apply bg-red-500
+  }
+
+  input:checked ~ .toggle-path {
+    @apply bg-red-200;
+  }
+
+  input:checked ~ .toggle-button {
+    @apply bg-red-500;
+  }
+}

@@ -17,8 +17,6 @@ input[type="checkbox"]:disabled {
 }
 
 .tw-checkbox-error {
-  @apply text-red-500;
-
   input[type="checkbox"] {
     @apply text-red-500 border-red-500;
   }
