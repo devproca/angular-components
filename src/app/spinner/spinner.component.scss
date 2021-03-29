@@ -6,7 +6,6 @@
     @apply border-blue-500;
 
     &.style3 {
-      @apply border-gray-300;
       border-top-color: #3B82F6; // blue-500
     }
   }
@@ -15,7 +14,6 @@
     @apply border-white;
 
     &.style3 {
-      @apply border-gray-300;
       border-top-color: white;
     }
   }
@@ -48,7 +46,7 @@
   }
 
   &.style3 {
-    @apply border-2 border-t-2 border-gray-200;
+    @apply border-2 border-t-2 border-gray-300;
     border-top-color: #3B82F6; // blue-500
   }
 }
