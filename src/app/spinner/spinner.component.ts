@@ -7,8 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  @Input() size: 'xs' | 'sm' | 'md' | 'lg' = 'lg';
-  @Input() style: '1' | '2' | '3' = '3';
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+  @Input() spinnerStyle: 'style1' | 'style2' | 'style3' = 'style1';
 
   constructor() { }
 
