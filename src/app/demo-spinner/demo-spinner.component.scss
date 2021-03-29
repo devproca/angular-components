@@ -1,0 +1,7 @@
+.centered {
+  @apply flex items-center justify-center;
+}
+
+.text {
+  @apply text-xl font-medium bg-blue-300;
+}

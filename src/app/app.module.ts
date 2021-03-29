@@ -34,6 +34,8 @@ import { CheckboxGroupComponent } from './checkbox/checkbox-group/checkbox-group
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { DemoSlideToggleComponent } from './demo-slide-toggle/demo-slide-toggle.component';
 import { SlideGroupComponent } from './slide-toggle/slide-group/slide-group.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { DemoSpinnerComponent } from './demo-spinner/demo-spinner.component';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { SlideGroupComponent } from './slide-toggle/slide-group/slide-group.comp
     CheckboxGroupComponent,
     SlideToggleComponent,
     DemoSlideToggleComponent,
-    SlideGroupComponent
+    SlideGroupComponent,
+    SpinnerComponent,
+    DemoSpinnerComponent
   ],
   imports: [
     BrowserModule,

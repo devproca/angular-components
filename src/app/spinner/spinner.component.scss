@@ -1,0 +1,52 @@
+.spinner-wrapper {
+  @apply animate-spin ease-linear rounded-full;
+
+  //// Color ////
+  &.blue {
+    @apply border-blue-500;
+
+    &.style3 {
+      border-top-color: #3B82F6; // blue-500
+    }
+  }
+
+  &.white {
+    @apply border-white;
+
+    &.style3 {
+      border-top-color: white;
+    }
+  }
+
+  //// Sizes ////
+  &.xs {
+    @apply h-6 w-6 border-2;
+  }
+
+  &.sm {
+    @apply h-12 w-12 border-2;
+  }
+
+  &.md {
+    @apply h-24 w-24 border-2;
+  }
+
+  &.lg {
+    @apply h-48 w-48 border-2
+  }
+
+  //// Styles ////
+  &.style1 {
+    border-right-color: transparent;
+    border-left-color: transparent;
+  }
+
+  &.style2 {
+    border-top-color: transparent;
+  }
+
+  &.style3 {
+    @apply border-2 border-t-2 border-gray-300;
+    border-top-color: #3B82F6; // blue-500
+  }
+}
