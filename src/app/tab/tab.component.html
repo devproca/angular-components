@@ -1,0 +1,7 @@
+<div class="tab-wrapper" (click)="onSelected()">
+  <button class="tab">{{ label }}</button>
+
+  <div class="content-wrapper" [hidden]="!isSelected">
+    <ng-content></ng-content>
+  </div>
+</div>

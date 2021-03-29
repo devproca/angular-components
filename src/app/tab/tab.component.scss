@@ -1,0 +1,11 @@
+.tab {
+  @apply text-gray-600 px-6 py-4 block;
+}
+
+.tab:hover {
+  @apply text-blue-500;
+}
+
+.tab:focus {
+  @apply outline-none font-medium text-blue-500 border-b-2 border-blue-500;
+}
