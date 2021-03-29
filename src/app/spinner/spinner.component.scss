@@ -1,6 +1,25 @@
 .spinner-wrapper {
   @apply animate-spin ease-linear rounded-full;
 
+  //// Color ////
+  &.blue {
+    @apply border-blue-500;
+
+    &.style3 {
+      @apply border-gray-300;
+      border-top-color: #3B82F6; // blue-500
+    }
+  }
+
+  &.white {
+    @apply border-white;
+
+    &.style3 {
+      @apply border-gray-300;
+      border-top-color: white;
+    }
+  }
+
   //// Sizes ////
   &.xs {
     @apply h-6 w-6 border-2;
@@ -20,13 +39,11 @@
 
   //// Styles ////
   &.style1 {
-    @apply border-blue-500;
     border-right-color: transparent;
     border-left-color: transparent;
   }
 
   &.style2 {
-    @apply border-blue-500;
     border-top-color: transparent;
   }
 
