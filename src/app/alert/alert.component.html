@@ -1,4 +1,7 @@
-<div [class.tw-alert-success]="type === 'success'">
+<div [class.tw-alert-success]="type === 'success'"
+     [class.tw-alert-info]="type === 'info'"
+     [class.tw-alert-warning]="type === 'warning'"
+     [class.tw-alert-danger]="type === 'danger'">
   <div class="alert-wrapper">
     <div class="flex">
       <!--    <div class="py-1">-->
@@ -15,10 +18,10 @@
 
       <div>
         <div class="typeText">{{ type }}!</div>
-        <p class="messageText">
-          {{ message }}
-        </p>
+        <p class="messageText">{{ message }}</p>
       </div>
+
+      <!-- TODO: Add a close button? -->
     </div>
   </div>
 </div>
