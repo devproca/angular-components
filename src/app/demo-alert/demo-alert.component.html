@@ -12,6 +12,10 @@
     <ng-template #alertWarning></ng-template>
 
     <div class="text-sm mt-4 mb-2">Danger Alert:</div>
-    <ng-template #alertDanger></ng-template>
+    <ng-template #alertDanger>
+      <div (change)="closeAlert($event)">
+      </div>
+    </ng-template>
+
   </div>
 </div>

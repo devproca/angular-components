@@ -15,7 +15,11 @@ svg {
   @apply fill-current h-10 w-10 mr-4;
 }
 
-//// STYLES ////
+.closeButton {
+  @apply flex-1 items-center justify-end;
+}
+
+//// TYPE STYLES ////
 .tw-alert-success {
   .alert-wrapper {
     @apply border-green-500 bg-green-100;

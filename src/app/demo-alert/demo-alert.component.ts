@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ViewChild, ViewContainerRef} from '@angular/core';
 
 import { AlertService } from '../alert/alert.service';
 
@@ -7,9 +7,7 @@ import { AlertService } from '../alert/alert.service';
   selector: 'tw-demo-alert',
   templateUrl: './demo-alert.component.html',
   styleUrls: ['./demo-alert.component.scss'],
-  providers: [
-    AlertService
-  ]
+  providers: [ AlertService ]
 })
 export class DemoAlertComponent implements AfterViewInit{
 
@@ -18,12 +16,18 @@ export class DemoAlertComponent implements AfterViewInit{
   @ViewChild('alertWarning', { read: ViewContainerRef }) alertWarning: ViewContainerRef;
   @ViewChild('alertDanger', { read: ViewContainerRef }) alertDanger: ViewContainerRef;
 
-  constructor(private alertService: AlertService) { }
+  constructor(private alertService: AlertService, private cDR: ChangeDetectorRef) { }
 
   ngAfterViewInit(): void {
-    this.alertService.success(this.alertSuccess, 'You have succeeded at your task. This is a success message that can be longer!');
-    this.alertService.info(this.alertInfo, 'Pay attention to this info before proceeding!');
+    this.alertService.success(this.alertSuccess, 'You have succeeded at your task.');
+    this.alertService.info(this.alertInfo, 'Pay attention to this info before proceeding.');
     this.alertService.warning(this.alertWarning, 'Something you have done is causing a warning!');
     this.alertService.danger(this.alertDanger, 'Make changes before you submit again, something went wrong!');
+    this.cDR.detectChanges(); // Fixes expressionChangedAfterItHaasBeenChecked Error.
+  }
+
+  closeAlert(value): void { // TODO
+    console.log('CLOSE ALERT REACHED', value);
+    // this.alertService.destroyAlert(/* Figure out how to grab correct reference here.*/);
   }
 }
