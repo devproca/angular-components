@@ -1,0 +1,21 @@
+.tab-wrapper {
+  @apply bg-white flex;
+}
+
+.tab-selected {
+  .tab {
+    @apply font-medium text-blue-500 border-blue-500;
+  }
+}
+
+.tab {
+  @apply block px-6 py-4 text-gray-600 border-gray-300 border-b-2;
+}
+
+.tab:hover {
+  @apply text-blue-400;
+}
+
+.tab:focus {
+  @apply outline-none;
+}

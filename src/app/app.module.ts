@@ -36,6 +36,9 @@ import { DemoSlideToggleComponent } from './demo-slide-toggle/demo-slide-toggle.
 import { SlideGroupComponent } from './slide-toggle/slide-group/slide-group.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { DemoSpinnerComponent } from './demo-spinner/demo-spinner.component';
+import { TabComponent } from './tab/tab.component';
+import { DemoTabsComponent } from './demo-tabs/demo-tabs.component';
+import { TabGroupComponent } from './tab/tab-group/tab-group.component';
 
 
 @NgModule({
@@ -71,7 +74,10 @@ import { DemoSpinnerComponent } from './demo-spinner/demo-spinner.component';
     DemoSlideToggleComponent,
     SlideGroupComponent,
     SpinnerComponent,
-    DemoSpinnerComponent
+    DemoSpinnerComponent,
+    TabComponent,
+    DemoTabsComponent,
+    TabGroupComponent
   ],
   imports: [
     BrowserModule,

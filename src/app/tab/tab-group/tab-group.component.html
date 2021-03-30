@@ -1,0 +1,9 @@
+<ul class="tab-wrapper">
+  <li *ngFor="let tab of tabs"
+      (click)="selectTab(tab)"
+      [class.tab-selected]="tab.isSelected">
+    <button class="tab">{{ tab.label }}</button>
+  </li>
+</ul>
+
+<ng-content></ng-content>
