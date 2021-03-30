@@ -20,7 +20,7 @@ export class TabGroupComponent implements AfterContentInit {
   }
 
   selectTab(tab: TabComponent): void {
-    this.tabs.toArray().forEach(t => t.isSelected = false); // Deselect all.
+    this.tabs.toArray().forEach(t => t.isSelected = false);
     tab.isSelected = true;
   }
 }
