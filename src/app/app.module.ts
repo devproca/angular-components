@@ -39,6 +39,8 @@ import { DemoSpinnerComponent } from './demo-spinner/demo-spinner.component';
 import { TabComponent } from './tab/tab.component';
 import { DemoTabsComponent } from './demo-tabs/demo-tabs.component';
 import { TabGroupComponent } from './tab/tab-group/tab-group.component';
+import { AlertComponent } from './alert/alert.component';
+import { DemoAlertComponent } from './demo-alert/demo-alert.component';
 
 
 @NgModule({
@@ -77,7 +79,9 @@ import { TabGroupComponent } from './tab/tab-group/tab-group.component';
     DemoSpinnerComponent,
     TabComponent,
     DemoTabsComponent,
-    TabGroupComponent
+    TabGroupComponent,
+    AlertComponent,
+    DemoAlertComponent
   ],
   imports: [
     BrowserModule,

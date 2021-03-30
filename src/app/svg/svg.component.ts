@@ -8,7 +8,8 @@ const SVGS = {
   calendar: require('!!raw-loader?!../../assets/svg/calendar.svg'),
   check: require('!!raw-loader?!../../assets/svg/check.svg'),
   elipsisVertical: require('!!raw-loader?!../../assets/svg/elipsis-vertical.svg'),
-  times: require('!!raw-loader?!../../assets/svg/times.svg')
+  times: require('!!raw-loader?!../../assets/svg/times.svg'),
+  info: require('!!raw-loader?!../../assets/svg/info.svg')
 };
 
 @Component({
