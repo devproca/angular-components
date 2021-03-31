@@ -11,8 +11,8 @@
   @apply text-sm;
 }
 
-svg {
-  @apply fill-current h-10 w-10 mr-4;
+.iconSVG {
+  @apply animate-bounce relative inline-flex fill-current h-10 w-10 mr-4;
 }
 
 .closeButton {
@@ -29,8 +29,8 @@ svg {
     @apply text-green-900;
   }
 
-  svg {
-    @apply text-green-500;
+  .iconSVG {
+    filter: invert(52%) sepia(78%) saturate(1767%) hue-rotate(122deg) brightness(96%) contrast(87%); // green-500
   }
 }
 
@@ -43,8 +43,8 @@ svg {
     @apply text-blue-900;
   }
 
-  svg {
-    @apply text-blue-500;
+  .iconSVG {
+    filter: invert(39%) sepia(84%) saturate(1511%) hue-rotate(202deg) brightness(100%) contrast(94%); // blue-500
   }
 }
 
@@ -57,8 +57,8 @@ svg {
     @apply text-yellow-900;
   }
 
-  svg {
-    @apply text-yellow-500;
+  .iconSVG {
+    filter: invert(68%) sepia(97%) saturate(1972%) hue-rotate(355deg) brightness(97%) contrast(98%); // yellow-500
   }
 }
 
@@ -71,7 +71,7 @@ svg {
     @apply text-red-900;
   }
 
-  svg {
-    @apply text-red-500;
+  .iconSVG {
+    filter: invert(36%) sepia(82%) saturate(3661%) hue-rotate(341deg) brightness(100%) contrast(86%); // red 500
   }
 }
