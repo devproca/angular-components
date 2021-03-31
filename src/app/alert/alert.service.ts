@@ -1,44 +1,26 @@
 import {ComponentFactoryResolver, Injectable, ViewContainerRef} from '@angular/core';
 
 import {AlertComponent} from './alert.component';
+import {AlertModel} from './alert.model';
+import {BehaviorSubject} from 'rxjs';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AlertService {
 
-  constructor(private factoryResolver: ComponentFactoryResolver) { }
+  private _alerts$ = new BehaviorSubject<AlertModel[]>([]);
+  alerts$ = this._alerts$.asObservable();
 
-  success(containerRef: ViewContainerRef, inputMessage: string): void {
-    const componentRef = this.createFactory(containerRef);
-    componentRef.instance.type = 'success';
-    componentRef.instance.message = inputMessage;
+  constructor() {
   }
 
-  info(containerRef: ViewContainerRef, inputMessage: string): void {
-    const componentRef = this.createFactory(containerRef);
-    componentRef.instance.type = 'info';
-    componentRef.instance.message = inputMessage;
+  success(message: string): void {
+    this._alerts$.next([...this._alerts$.getValue(), {type: 'success', message}]);
   }
 
-  warning(containerRef: ViewContainerRef, inputMessage: string): void {
-    const componentRef = this.createFactory(containerRef);
-    componentRef.instance.type = 'warning';
-    componentRef.instance.message = inputMessage;
-  }
-
-  danger(containerRef: ViewContainerRef, inputMessage: string): void {
-    const componentRef = this.createFactory(containerRef);
-    componentRef.instance.type = 'danger';
-    componentRef.instance.message = inputMessage;
-  }
-
-  createFactory(containerRef: ViewContainerRef): any {
-    containerRef.clear();
-    const factory = this.factoryResolver.resolveComponentFactory(AlertComponent);
-    return containerRef.createComponent(factory);
-  }
-
-  destroyAlert(ref: ViewContainerRef): void {  // TODO
-    ref.clear();
+  clearAll(): void {
+    this._alerts$.next([]);
   }
 }

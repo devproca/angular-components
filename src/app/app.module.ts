@@ -41,6 +41,7 @@ import { DemoTabsComponent } from './demo-tabs/demo-tabs.component';
 import { TabGroupComponent } from './tab/tab-group/tab-group.component';
 import { AlertComponent } from './alert/alert.component';
 import { DemoAlertComponent } from './demo-alert/demo-alert.component';
+import {AlertsComponent} from './alert/alerts.component';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { DemoAlertComponent } from './demo-alert/demo-alert.component';
     DemoTabsComponent,
     TabGroupComponent,
     AlertComponent,
+    AlertsComponent,
     DemoAlertComponent
   ],
   imports: [

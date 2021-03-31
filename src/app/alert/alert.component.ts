@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import {Component, Output, EventEmitter, Input} from '@angular/core';
 
 @Component({
   selector: 'tw-alert',
@@ -6,10 +6,10 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent {
-  @Output() close = new EventEmitter<void>();
 
-  type: 'success' | 'info' | 'warning' | 'danger' = 'success';
-  message: string;
+  @Input() type: 'success' | 'info' | 'warning' | 'danger' = 'success';
+  @Input() message: string;
+  @Output() close = new EventEmitter<void>();
 
   constructor() { }
 
