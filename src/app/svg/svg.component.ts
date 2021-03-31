@@ -21,7 +21,7 @@ const SVGS = {
 export class SvgComponent implements OnInit {
 
   @Input() iconName: string;
-  @Input() size: 'xs' | 'sm' | 'md' = 'md';
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   svg: SafeHtml;
 

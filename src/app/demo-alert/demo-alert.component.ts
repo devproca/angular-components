@@ -15,7 +15,7 @@ export class DemoAlertComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.alertService.success('This is a success');
+    this.alertService.success('This is a success', 'this is some subtext');
 
     setTimeout(() => {
       this.alertService.success('This is a second success');

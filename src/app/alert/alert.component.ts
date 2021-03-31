@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, Input} from '@angular/core';
+import {Component, Output, EventEmitter, Input, HostBinding} from '@angular/core';
 
 @Component({
   selector: 'tw-alert',
@@ -7,8 +7,9 @@ import {Component, Output, EventEmitter, Input} from '@angular/core';
 })
 export class AlertComponent {
 
-  @Input() type: 'success' | 'info' | 'warning' | 'danger' = 'success';
+  @HostBinding('attr.type') @Input() type: 'success' | 'info' | 'warning' | 'danger' = 'success';
   @Input() message: string;
+  @Input() details: string;
   @Output() close = new EventEmitter<void>();
 
   constructor() { }

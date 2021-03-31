@@ -6,7 +6,7 @@
   @apply inline-flex items-center justify-center;
 
   > svg {
-    @apply h-4 w-auto text-gray-600;
+    @apply h-4 w-auto;
   }
 
   &.sm > svg {
@@ -15,6 +15,14 @@
 
   &.xs > svg {
     @apply h-3;
+  }
+
+  &.lg > svg {
+    @apply h-6;
+  }
+
+  &.xl > svg {
+    @apply h-8;
   }
 }
 

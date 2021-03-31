@@ -1,23 +1,18 @@
-<div [class.tw-alert-success]="type === 'success'"
-     [class.tw-alert-info]="type === 'info'"
-     [class.tw-alert-warning]="type === 'warning'"
-     [class.tw-alert-danger]="type === 'danger'">
-  <div class="alert-wrapper">
-    <div class="flex">
+<div class="alert-wrapper">
 
-      <div class="py-1">
-        <img src="../../assets/svg/check.svg" class="iconSVG" *ngIf="type === 'success'">
-        <img src="../../assets/svg/info.svg" class="iconSVG" *ngIf="type === 'info'">
-        <img src="../../assets/svg/exclamation.svg" class="iconSVG" *ngIf="type === 'warning'">
-        <img src="../../assets/svg/times.svg" class="iconSVG" *ngIf="type === 'danger'">
-      </div>
+  <div class="alert-icon">
+    <tw-svg iconName="check" class="text-green-500" size="xl" *ngIf="type === 'success'"></tw-svg>
+    <tw-svg iconName="info" size="xl" *ngIf="type === 'info'"></tw-svg>
+    <tw-svg iconName="exclamation" size="xl" *ngIf="type === 'warning'"></tw-svg>
+    <tw-svg iconName="times" size="xl" *ngIf="type === 'danger'"></tw-svg>
+  </div>
 
-      <div>
-        <div class="typeText">{{ type }}</div>
-        <p class="messageText">{{ message }}</p>
-      </div>
+  <div class="alert-text">
+    <div class="alert-message">{{ message }}</div>
+    <div class="alert-details" *ngIf="details">{{ details }}</div>
+  </div>
 
-      <tw-svg class="closeButton" iconName="times" (click)="onClose()"></tw-svg>
-    </div>
+  <div class="alert-dismiss">
+    <tw-svg iconName="times" (click)="onClose()"></tw-svg>
   </div>
 </div>

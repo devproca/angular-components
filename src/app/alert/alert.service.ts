@@ -16,11 +16,18 @@ export class AlertService {
   constructor() {
   }
 
-  success(message: string): void {
-    this._alerts$.next([...this._alerts$.getValue(), {type: 'success', message}]);
+  success(message: string, details?: string): void {
+    this._alerts$.next([...this._alerts$.getValue(), {type: 'success', message, details}]);
   }
 
   clearAll(): void {
     this._alerts$.next([]);
   }
+
+  remove(alertModel: AlertModel): void {
+    const currentAlerts = this._alerts$.getValue().slice();
+    currentAlerts.splice(currentAlerts.findIndex(a => a === alertModel), 1);
+    this._alerts$.next(currentAlerts);
+  }
+
 }
