@@ -3,11 +3,19 @@
 }
 
 :host[type='success'] .alert-wrapper {
-  @apply border-green-500 bg-green-100;
+  @apply border-green-500 bg-green-100 text-green-900;
+}
+
+:host[type='info'] .alert-wrapper {
+  @apply border-blue-500 bg-blue-100 text-blue-900;
+}
+
+:host[type='warning'] .alert-wrapper {
+  @apply border-yellow-500 bg-yellow-100 text-yellow-900;
 }
 
 :host[type='danger'] .alert-wrapper {
-  @apply border-red-500 bg-red-100;
+  @apply border-red-500 bg-red-100 text-red-900;
 }
 
 .alert-wrapper {
@@ -23,7 +31,7 @@
 }
 
 .alert-message {
-  @apply text-sm;
+  @apply text-sm font-medium;
 }
 
 .alert-details {
@@ -31,5 +39,5 @@
 }
 
 .alert-dismiss {
-  @apply flex items-center justify-center text-gray-700 cursor-pointer px-4;
+  @apply flex items-center justify-center text-gray-500 cursor-pointer px-4;
 }

@@ -9,7 +9,8 @@ const SVGS = {
   check: require('!!raw-loader?!../../assets/svg/check.svg'),
   elipsisVertical: require('!!raw-loader?!../../assets/svg/elipsis-vertical.svg'),
   times: require('!!raw-loader?!../../assets/svg/times.svg'),
-  info: require('!!raw-loader?!../../assets/svg/info.svg')
+  info: require('!!raw-loader?!../../assets/svg/info.svg'),
+  exclamation: require('!!raw-loader?!../../assets/svg/exclamation.svg')
 };
 
 @Component({
@@ -25,8 +26,7 @@ export class SvgComponent implements OnInit {
 
   svg: SafeHtml;
 
-  constructor(private sanitizer: DomSanitizer) {
-  }
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.svg = this.sanitizer.bypassSecurityTrustHtml(SVGS[this.iconName].default);
