@@ -1,0 +1,17 @@
+<div class="alert-wrapper">
+  <div class="alert-icon">
+    <tw-svg iconName="check" class="text-green-500" size="xl" *ngIf="type === 'success'"></tw-svg>
+    <tw-svg iconName="info" class="text-blue-500" size="xl" *ngIf="type === 'info'"></tw-svg>
+    <tw-svg iconName="exclamation" class="text-yellow-500" size="xl" *ngIf="type === 'warning'"></tw-svg>
+    <tw-svg iconName="times" class="text-red-500 pl-1 pr-2" size="xl" *ngIf="type === 'danger'"></tw-svg>
+  </div>
+
+  <div class="alert-text">
+    <div class="alert-message">{{ message }}</div>
+    <div class="alert-details" *ngIf="details">{{ details }}</div>
+  </div>
+
+  <div class="alert-dismiss">
+    <tw-svg iconName="times" (click)="onClose()"></tw-svg>
+  </div>
+</div>

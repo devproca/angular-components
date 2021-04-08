@@ -1,0 +1,9 @@
+<div class="alerts">
+  <ng-container *ngFor="let alert of alerts$ | async">
+    <tw-alert [type]="alert.type"
+              [message]="alert.message"
+              [details]="alert.details"
+              (close)="handleClose(alert)">
+    </tw-alert>
+  </ng-container>
+</div>
